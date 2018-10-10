@@ -1,65 +1,29 @@
 @extends('main')
-
+@section('title',' | Şifre Sıfırla')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+    <style>
+        form {border: 3px solid #f1f1f1;}
+        input[type=email], input[type=password] {width: 100%;padding: 12px 20px;margin: 8px 0;display: inline-block;border: 1px solid #ccc;box-sizing: border-box;}
+        button {background-color: #4CAF50;color: white;padding: 14px 20px;margin: 8px 0;border: none;cursor: pointer;width: 100%;}
+        button:hover {opacity: 0.8;}
+        span.psw {float: right;padding-top: 16px;}
+        @media screen and (max-width: 300px) {span.psw {display: block;float: none;}.cancelbtn {width: 100%;}}
+    </style> 
+    <br><br><br><h1>Şifre Sıfırla</h1>
+    <form method="POST" action="{{ route('password.update') }}">
+        @csrf
+        <input type="hidden" name="token" value="{{ $token }}">
+        <input id="email" type="email" class="w3-input {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email ?? old('email') }}" required autofocus placeholder="Email Adresiniz">
+        @if ($errors->has('email'))
+            <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('email') }}</strong></span>
+        @endif
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
+        <input id="password" type="password" class="w3-input {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Yeni Şifreniz">
+        @if ($errors->has('password'))
+            <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('password') }}</strong></span>
+        @endif 
 
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ $email ?? old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <input id="password-confirm" type="password" class="w3-input" name="password_confirmation" required placeholder="Yeni Şifrenizi Tekrar Giriniz.">
+        <button type="submit" class="btn btn-primary">Şifreyi Değiştir</button>
+    </form> 
 @endsection

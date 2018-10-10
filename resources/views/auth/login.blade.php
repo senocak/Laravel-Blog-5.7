@@ -1,72 +1,42 @@
 @extends('main')
-
 @section('title',' | All Posts')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+    <style>
+        form {border: 3px solid #f1f1f1;}
+        input[type=email], input[type=password] {width: 100%;padding: 12px 20px;margin: 8px 0;display: inline-block;border: 1px solid #ccc;box-sizing: border-box;}
+        button {background-color: #4CAF50;color: white;padding: 14px 20px;margin: 8px 0;border: none;cursor: pointer;width: 100%;}
+        button:hover {opacity: 0.8;}
+        span.psw {float: right;padding-top: 16px;}
+        @media screen and (max-width: 300px) {span.psw {display: block;float: none;}.cancelbtn {width: 100%;}}
+    </style> 
+    <br><br><br>
+    <form method="POST" action="{{ route('login') }}">
+        @csrf  
+        <input id="email" type="email" class="w3-input {{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus placeholder="Email Adresiniz">
+        @if ($errors->has('email')) 
+            <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('email') }}</strong></span>
+        @endif 
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+        <input id="password" type="password" class="w3-input {{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required placeholder="Şifre">
+        @if ($errors->has('password'))
+            <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('password') }}</strong></span>
+        @endif
+ 
+        <input class="w3-check" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Beni Hatırla
 
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+        <button type="submit" class="w3-btn w3-button w3-block w3-green">Login</button>
+        <a   href="{{ route('password.request') }}"> Şifremi unuttum?</a>
+    </form> 
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+    <br><hr><br>
 
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+    <form method="POST" action="{{ route('password.email') }}">
+        @csrf
+        <input id="email" type="email" class="w3-input" name="email" required autofocus placeholder="Sıfırlamak istediğiniz email adresi">
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <button type="submit" class="w3-btn w3-button w3-block w3-teal">Şifre Sıfırla</button>
+    </form>
+    @if (session('status'))
+        <div class="alert alert-success" role="alert">{{ session('status') }}</div>
+    @endif
 @endsection
