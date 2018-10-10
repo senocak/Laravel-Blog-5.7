@@ -1,5 +1,5 @@
 @extends('main')
 @section('title',' | About Page')
 @section('content')
-About
+	{!! $data["about"] !!}
 @endsection

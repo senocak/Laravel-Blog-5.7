@@ -13,12 +13,13 @@
 <?php $sayac=0; ?>
 <br>
 	<a href="{{ route('posts.create') }}" class="w3-btn w3-blue-grey w3-block">Create Post</a>	
-	<table class="w3-table w3-striped w3-border">
+	<table class="w3-table-all">
 	    <tr>
 	     	<thead>
 				<th>#</th>
-		      	<th>Title</th> 
-		      	<th>Created At</th>
+		      	<th>Başlık</th> 
+		      	<th>Kategori</th> 
+		      	<th>Tarih</th>
 		     	<th></th>
 	     	</thead>
 	    </tr>
@@ -29,8 +30,9 @@
 	    		<tr class="w3-hover-black" id="item-{{ $post->id }}">
 	    			<td class="sortable"><?php echo $sayac;?></td>
 	    			<td>{{ $post->title }}</td>
+	    			<th>{{ $post->category["name"] }}</th>
 	    			<td>{{ date('M j, Y',strtotime($post->created_at)) }}</td>
-	    			<td><a href="/posts/{{$post->id}}/edit" class="w3-button w3-khaki">Edit</a></td>
+	    			<td><a href="/posts/{{$post->id}}/edit" class="w3-button w3-khaki">Düzenle</a></td>
 	    		</tr>
 	    	@endforeach
 	    </tbody> 

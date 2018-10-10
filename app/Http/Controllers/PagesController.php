@@ -2,10 +2,17 @@
 namespace App\Http\Controllers;
 use App\Post;
 use App\Category;
+use App\User;
 use Illuminate\Http\Request;
 use Mail;
 use Session;
+use Auth;
+use Image; 
+use Storage;
 class PagesController extends Controller{
+  public function __construct(){
+    $this->middleware('auth',['except' => ['getAbout','getContact','getIndex']]);
+  }
   public function getIndex(){
     //$posts=Post::orderBy('created_at','desc')->limit(6)->get();
     $posts=Post::orderBy('id','desc')->paginate(6);
@@ -14,6 +21,7 @@ class PagesController extends Controller{
     return view("pages.welcome")->withPosts($posts)->withCategory($category);
   }
   public function getAbout(){
+    /*
     $first="Anıl";
     $last="Şenocak";
     $fullname=$first." ".$last;
@@ -22,9 +30,39 @@ class PagesController extends Controller{
     $data["email"]=$email;
     $data["fullname"]=$fullname;
     return view("pages.about")->withData($data);
+    */
+    $user=User::find("1");
+    return view("pages.about")->withData($user);
   }
   public function getContact(){
     return view("pages.contact");
+  }
+  public function getProfile(){
+    return view("pages.profile");
+  }
+  public function saveProfile(Request $request){
+    $this->validate($request,array(
+      'name'    => 'required|min:3|max:255',
+      'email'   => 'required|min:3|max:255'
+    ));
+    $user=User::find(Auth::user()->id);
+    $user->name=$request->name;
+    $user->email=$request->email;
+    $user->about=$request->about;
+    if ($request->hasFile('img')) {
+      //$slug=$this->self_url(($request->name));
+      $img=$request->file('img');
+      $filename="pp.jpg";
+      $location=public_path('images/'.$filename);
+      //Image::make($img)->resize(700,900)->save($location);
+      Image::make($img)->save($location);
+      $oldfilename=$user->picture;
+      $user->picture=$filename;
+      //Storage::delete($oldfilename);
+    }
+    $user->save();
+    Session::flash('success','Profil Güncellendi.'); 
+    return redirect()->route('login.index');
   }
   public function postContact(Request $request){
     $this->validate($request,array(
@@ -44,5 +82,11 @@ class PagesController extends Controller{
     });
     Session::flash('success','Your Email Successfully Sent');
     return redirect('contact');
+  }
+  public function self_url($title){
+    $search = array(" ","ö","ü","ı","ğ","ç","ş","/","?","Ö","Ü","I","Ğ","Ç","Ş","&","'");
+    $replace = array("_","o","u","i","g","c","s","_","_","o","u","i","g","c","s","_","");
+    $new_text = str_replace($search,$replace,trim($title));
+    return $new_text;
   }
 }

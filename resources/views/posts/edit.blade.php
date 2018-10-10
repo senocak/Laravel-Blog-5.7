@@ -1,11 +1,8 @@
 @extends('main')
-
 @section('title',' | Edit Post')
-
 @section('stylesheet')
 	{!! Html::style('css/parsley.css') !!} 
 	{!! Html::style('css/select2.css') !!}
-	
 	
 	{!! Html::style('editor/ckeditor/ckeditor.css') !!}
 	{!! Html::script('editor/ckeditor/ckeditor.js') !!}
@@ -17,33 +14,32 @@
 		});  
 	</script>
 @endsection
-
 @section('content')
 	{!! Form::model($post,['route'=>['posts.update',$post->id],'method'=>'PUT']) !!}
 		<div class="w3-card-4 w3-margin w3-white"> 
 			<div class="w3-display-container" style="background-image: url(../../images/{{ $post->category['picture'] }});width: 100%;"> 
 				<img class="w3-display-container" src="../../images/{{ $post->category['picture'] }}" style="width:100%">
 				<div class="w3-display-bottomleft w3-container w3-khaki">
-					Created At: <span class="w3-opacity">{{ date('M j, Y H:ia',strtotime($post->created_at)) }}</span><br>
-					Last Updated: <span class="w3-opacity">{{ date('M j, Y H:ia',strtotime($post->updated_at)) }}</span>
+					Oluşturma: <span class="w3-opacity">{{ date('M j, Y H:ia',strtotime($post->created_at)) }}</span><br>
+					Güncelleme: <span class="w3-opacity">{{ date('M j, Y H:ia',strtotime($post->updated_at)) }}</span>
 				</div>
-				<a href="/posts/" class="w3-display-bottomright w3-container w3-button w3-red">Return Posts</i></a>
+				<a href="/posts/" class="w3-display-bottomright w3-container w3-button w3-red">Geri Dön</i></a>
 			</div>
 			<div class="w3-container">
-				{{ Form::label('title','Title') }}
+				{{ Form::label('title','Başlık') }}
 				{{ Form::text('title',null,["class"=>"w3-input w3-gray"]) }} 
 
-				{{Form::label('category_id','Category:')}}
+				{{Form::label('category_id','Kategori:')}}
 			    {{Form::select('category_id',$categories,null,['class'=>'w3-input w3-gray'])}}
 
-			    {{Form::label('tags','Tags:')}}
+			    {{Form::label('tags','Tag:')}}
 			    {{Form::select('tags[]',$tags,null,['class'=>'w3-input select2-multi','multiple'=>'multiple'])}}
  		   	 
-				{{ Form::label('body','Body') }}
+				{{ Form::label('body','İçerik') }}
 				<p style="text-align:justify">{{ Form::textarea('body',null,["class"=>"ckeditor",'id'=>'editor1']) }}</p>
 			</div> 
-			{{ Form::submit('Save',["class"=>"w3-button w3-green w3-block"]) }}
-			<a href="/posts/{{$post->id}}/delete" class="w3-block w3-button w3-red">Delete</a>
+			{{ Form::submit('Kaydet',["class"=>"w3-button w3-green w3-block"]) }}
+			<a href="/posts/{{$post->id}}/delete" class="w3-block w3-button w3-red">Sil</a>
 		</div>
 	{!! Form::close() !!}
 @endsection

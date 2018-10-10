@@ -40,3 +40,5 @@ Auth::routes(['register'=>false]);
 
 Route::post('postSirala', ['uses'=>'PostController@sortPosts','as'=>'posts.sortPosts']);
 Route::post('categorySirala', ['uses'=>'CategoryController@sortPosts','as'=>'categories.sortPosts']);
+Route::get('profile', ['uses'=>'PagesController@getProfile','as'=>'login.index']);
+Route::post('profile', ['uses'=>'PagesController@saveProfile','as'=>'login.save']);
