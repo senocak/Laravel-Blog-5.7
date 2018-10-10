@@ -17,7 +17,6 @@ class PagesController extends Controller{
     //$posts=Post::orderBy('created_at','desc')->limit(6)->get();
     $posts=Post::orderBy('id','desc')->paginate(6);
     $category=Category::all();
-
     return view("pages.welcome")->withPosts($posts)->withCategory($category);
   }
   public function getAbout(){

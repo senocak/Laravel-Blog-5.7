@@ -36,14 +36,13 @@
 			    {{Form::select('tags[]',$tags,null,['class'=>'w3-input select2-multi','multiple'=>'multiple'])}}
  		   	 
 				{{ Form::label('body','İçerik') }}
-				<p style="text-align:justify">{{ Form::textarea('body',null,["class"=>"ckeditor",'id'=>'editor1']) }}</p>
+				{{ Form::textarea('body',null,["class"=>"ckeditor",'id'=>'editor1']) }}
 			</div> 
 			{{ Form::submit('Kaydet',["class"=>"w3-button w3-green w3-block"]) }}
 			<a href="/posts/{{$post->id}}/delete" class="w3-block w3-button w3-red">Sil</a>
 		</div>
 	{!! Form::close() !!}
 @endsection
-
 @section('scripts')
 	{!! Html::script('js/parsley.js') !!}
 	{!! Html::script('js/select2.js') !!}

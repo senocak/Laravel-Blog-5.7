@@ -7,7 +7,12 @@
       if($i%3==0){ echo "<div class='w3-row-padding' style='margin-top: 20px;'>";}
    ?>
     <div class="w3-third w3-container">
-      <a href="{{ url('blog/'.$post->slug) }}"><img src="../images/{{ $post->category['picture'] }}" alt="Norway" style="width:100%" class="w3-hover-opacity"></a>
+      <div class="w3-display-container w3-hover-gray scale" style="width: 100%;">
+        <a href="{{ url('blog/'.$post->slug) }}">
+          <img src="../images/{{ $post->category['picture'] }}" alt="Norway" style="width:100%" class="w3-hover-opacity">
+        </a>
+        <div class="w3-display-bottomleft w3-container w3-white"><b>{{$post->category["name"]}}</b></div>
+      </div>
       <div class="w3-container w3-white">
         <p><b>{{$post->title}}</b></p>
         <?php
@@ -20,7 +25,7 @@
         } 
         $i++;
         ?>
-        <p>
+        <p style="text-align: justify;">
           {!! $icerik !!}<br>
           @foreach($post->tags as $tag)
             <span class="w3-tag">{{$tag->name}}</span>
