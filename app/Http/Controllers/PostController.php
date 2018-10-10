@@ -11,7 +11,7 @@ class PostController extends Controller{
         $this->middleware('auth');
     }
     public function index() {
-        $posts=Post::orderBy('id','desc')->paginate(20);
+        $posts=Post::orderBy('sira','asc')->paginate(20);
         return view('posts.index')->withPosts($posts);
     }
     public function create(){
@@ -35,13 +35,11 @@ class PostController extends Controller{
         $post->body=$request->body;
         $post->category_id=$request->category_id;
         $post->save();
-
         $post->tags()->sync($request->tags,false);
         //redirect
-        Session::flash('success','Post Successfully Saved');
+        Session::flash('success','Yazı Kaydedildi.');
         //return redirect()->route('posts.show',$post->id);
         return redirect()->route('posts.index');
-
     }
     public function show($id){
         $post=Post::find($id);
@@ -81,7 +79,7 @@ class PostController extends Controller{
 
         $post->tags()->sync($request->tags);
         //redirect
-        Session::flash('success','Post Successfully Updated');
+        Session::flash('success','Yazı Güncellendi');
         //return redirect()->route('posts.show',$post->id);
         return redirect()->route('posts.index');
     }
@@ -89,7 +87,7 @@ class PostController extends Controller{
         $post=Post::find($id);
         $post->tags()->detach();
         $post->delete();
-        Session::flash('success','Post Successfully Deleted');
+        Session::flash('success','Yazı Silindi');
         return redirect()->route('posts.index');
     }
     public function self_url($title){
@@ -101,5 +99,15 @@ class PostController extends Controller{
     public function getDelete($id){
         $post=Post::find($id);
         return view("posts.delete")->withPost($post);
+    }
+    public function sortPosts(Request $request){
+        foreach ( $_POST['item'] as $key => $value ){ 
+            $post=Post::find($value);
+            $post->sira=$key;
+            $post->save();    
+        }
+        Session::flash('success','İçeriklerin sırala işlemi güncellendi');
+        //return redirect()->route('posts.index');
+        return array( 'islemSonuc' => true , 'islemMsj' => 'İçeriklerin sırala işlemi güncellendi' );
     }
 }

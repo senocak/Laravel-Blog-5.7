@@ -33,3 +33,9 @@ Route::get('/posts/{id}/delete',['uses'=>'PostController@getDelete','as'=>'posts
 Route::get('/categories/{id}/delete',['uses'=>'CategoryController@getDelete','as'=>'categories.getDelete']);
 
 Auth::routes(['register'=>false]);
+
+
+
+
+
+Route::post('postSirala', ['uses'=>'PostController@sortPosts','as'=>'posts.sortPosts']);
