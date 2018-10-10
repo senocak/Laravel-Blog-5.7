@@ -15,7 +15,7 @@ class CategoryController extends Controller{
         $this->middleware('auth');
     }
     public function index(){ 
-        $categories=Category::orderBy('id','desc')->paginate(10);
+        $categories=Category::orderBy('sira','asc')->paginate(10);
         //$categories=Category::all();
         return view('categories.index')->withCategories($categories);
     }
@@ -103,5 +103,15 @@ class CategoryController extends Controller{
     public function getDelete($id){
         $category=Category::find($id);
         return view("categories.delete")->withCategory($category);
+    }
+    public function sortPosts(Request $request){
+        foreach ( $request->item as $key => $value ){ 
+            $category=Category::find($value);
+            $category->sira=$key;
+            $category->save();    
+        }
+        Session::flash('success','İçeriklerin sırala işlemi güncellendi');
+        //return redirect()->route('posts.index');
+        return array( 'islemSonuc' => true , 'islemMsj' => 'İçeriklerin sırala işlemi güncellendi' );
     }
 }

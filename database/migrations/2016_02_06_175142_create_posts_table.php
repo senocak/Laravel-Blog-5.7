@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
 			$table->integer('category_id');
             $table->text('body');
             $table->timestamps();
+            $table->integer('sira');
         });
     }
 

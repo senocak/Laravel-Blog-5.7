@@ -1,6 +1,15 @@
 @extends('main')
 @section('title',' | All categorys')
+
+@section('stylesheet')
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<style type="text/css">.sortable { cursor: move; }</style>
+@endsection
+
 @section('content')
+	<div id="alert"></div>
+	<?php $sayac=0; ?> 
 	<br>
 	<script type="text/javascript">
 		function showimagepreview(input) {
@@ -22,18 +31,49 @@
 			     	<th></th>
 		     	</thead>
 		    </tr>
-		    <tbody>
+		    <tbody id="sortable">
 		    	@foreach($categories as $category)
-		    		<tr class="w3-hover-black">
-		    			<th>{{ $category->id }}</th>
-		    			<th><img src="images/{{ $category->picture }}" style="width:150px"></th> 
-		    			<th>{{ $category->name }}</th> 
+		    		<?php $sayac++ ;?>
+	    			<meta name="csrf-token" content="{{ csrf_token() }}">
+		    		<tr class="w3-hover-black" id="item-{{ $category->id }}">
+		    			<td class="sortable">{{$sayac}}</td>
+		    			<td><img src="images/{{ $category->picture }}" style="width:150px"></td> 
+		    			<td>{{ $category->name }}</td> 
 		    			<td>{{ date('M j, Y',strtotime($category->created_at)) }}</td>
-		    			<td><a href="/categories/{{$category->id}}/edit" class="w3-button w3-khaki">Edit</a></td>
+		    			<td><a href="/categories/{{$category->id}}/edit" class="w3-button w3-khaki">Düzenle</a></td>
 		    		</tr>
 		    	@endforeach
 		    </tbody> 
-	  	</table>  
+	  	</table> 
+	  	<script type="text/javascript"> 
+		var x = document.getElementById("alert"); 
+		$(function() {
+			$( "#sortable" ).sortable({
+				revert: true,
+				handle: ".sortable",
+				stop: function (event, ui) {
+					var data = $(this).sortable('serialize'); 
+					$.ajax({
+						headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+						type: "POST",
+						dataType: "json",
+						data: data,
+						url: '{{route("categories.sortPosts")}}',
+						success: function(msg){  
+							alert(msg.islemMsj);
+							//document.getElementById("alert").innerHTML="<div class='w3-panel w3-green w3-round' ><h3>Success!</h3>"+msg.islemMsj+"</div>"; 
+						}
+					});	
+					/*
+					setInterval(function() {
+						document.getElementById("alert").innerHTML="";
+					}, 3000);
+					*/
+				}
+			});
+			$( "#sortable" ).disableSelection();	                      		
+		});	                      	
+	</script> 
 	  	<div class="w3-center">
 	  		{!! $categories->links('posts.page') !!} 
 		</div>

@@ -32,8 +32,9 @@ class TagController extends Controller
         return view('tags.show')->withTags($tags);
     }
     public function edit($id){
-        $tags=Tag::find($id);
-        return view('tags.edit')->withTags($tags);
+        //$tags=Tag::find($id);
+        //return view('tags.edit')->withTags($tags);
+        return redirect()->route('tags.index');
     }
     public function update(Request $request, $id){
         $this->validate($request,array('name' => 'required|max:255'));

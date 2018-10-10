@@ -19,7 +19,6 @@
 @endsection
 
 @section('content')
-
 	{!! Form::model($post,['route'=>['posts.update',$post->id],'method'=>'PUT']) !!}
 		<div class="w3-card-4 w3-margin w3-white"> 
 			<div class="w3-display-container" style="background-image: url(../../images/{{ $post->category['picture'] }});width: 100%;"> 
@@ -42,23 +41,18 @@
  		   	 
 				{{ Form::label('body','Body') }}
 				<p style="text-align:justify">{{ Form::textarea('body',null,["class"=>"ckeditor",'id'=>'editor1']) }}</p>
-			</div>  
+			</div> 
 			{{ Form::submit('Save',["class"=>"w3-button w3-green w3-block"]) }}
 			<a href="/posts/{{$post->id}}/delete" class="w3-block w3-button w3-red">Delete</a>
 		</div>
 	{!! Form::close() !!}
-
 @endsection
 
 @section('scripts')
 	{!! Html::script('js/parsley.js') !!}
 	{!! Html::script('js/select2.js') !!}
 
-	<script type="text/javascript">
-		$('.select2-multi').select2();
-	</script>
-
-
+	<script type="text/javascript">	$('.select2-multi').select2(); </script>
 	<script language="javascript" type="text/javascript">
 		CKEDITOR.replace('editor1',{
 			filebrowserWindowWidth: '900',

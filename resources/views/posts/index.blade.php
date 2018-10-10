@@ -1,17 +1,15 @@
 @extends('main')
 @section('title',' | All Posts')
 
-
 @section('stylesheet')
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+	<style type="text/css">.sortable { cursor: move; }</style>
 @endsection
-
 
 @section('content')
 
 <div id="alert"></div>
-<style type="text/css">.sortable { cursor: move; }</style>
 <?php $sayac=0; ?>
 <br>
 	<a href="{{ route('posts.create') }}" class="w3-btn w3-blue-grey w3-block">Create Post</a>	

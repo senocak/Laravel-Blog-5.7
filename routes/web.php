@@ -39,3 +39,4 @@ Auth::routes(['register'=>false]);
 
 
 Route::post('postSirala', ['uses'=>'PostController@sortPosts','as'=>'posts.sortPosts']);
+Route::post('categorySirala', ['uses'=>'CategoryController@sortPosts','as'=>'categories.sortPosts']);

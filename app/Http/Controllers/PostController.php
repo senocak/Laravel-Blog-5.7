@@ -11,7 +11,7 @@ class PostController extends Controller{
         $this->middleware('auth');
     }
     public function index() {
-        $posts=Post::orderBy('sira','asc')->paginate(20);
+        $posts=Post::orderBy('sira','asc')->paginate(30);
         return view('posts.index')->withPosts($posts);
     }
     public function create(){
@@ -101,7 +101,7 @@ class PostController extends Controller{
         return view("posts.delete")->withPost($post);
     }
     public function sortPosts(Request $request){
-        foreach ( $_POST['item'] as $key => $value ){ 
+        foreach ( $request->item as $key => $value ){ 
             $post=Post::find($value);
             $post->sira=$key;
             $post->save();    
