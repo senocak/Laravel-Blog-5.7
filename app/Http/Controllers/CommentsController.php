@@ -34,7 +34,7 @@ class CommentsController extends Controller{
         $comment->save();
 
         //redirect
-        Session::flash('success','Comment Successfully Saved');
+        Session::flash('success','Yorum Eklendi');
         //return redirect()->route('posts.show',$post->id);
         return redirect()->route('blog.single',[$post->slug]);
     }
@@ -51,7 +51,7 @@ class CommentsController extends Controller{
         $comment->comment=$request->comment;
         $comment->save();
         //redirect
-        Session::flash('success','Comment Successfully Updated');
+        Session::flash('success','Yorum Güncellendi');
         //return redirect()->route('posts.show',$post->id);
         return redirect()->route('posts.show',$comment->post->id); 
     }
@@ -63,7 +63,7 @@ class CommentsController extends Controller{
         $comment=Comment::find($id);
         $postid=$comment->post->id;
         $comment->delete();
-        Session::flash('success','Comment Successfully Deleted');
+        Session::flash('success','Yorum Silindi');
         return redirect()->route('posts.show',$postid); 
     }
 }

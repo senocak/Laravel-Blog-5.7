@@ -9,7 +9,6 @@ use Session;
 use Image; 
 use Storage; 
 
-
 class CategoryController extends Controller{
     public function __construct(){
         $this->middleware('auth');
@@ -43,7 +42,7 @@ class CategoryController extends Controller{
 
         $category->save();
         //redirect
-        Session::flash('success','New Category Added');
+        Session::flash('success','Yeni Kategori Eklendi');
         //return redirect()->route('posts.show',$category->id);
         return redirect()->route('categories.index');
     }
@@ -75,7 +74,7 @@ class CategoryController extends Controller{
         }
         $category->save();
         //redirect
-        Session::flash('success','New Category Updated');
+        Session::flash('success','Kategori Güncellendi');
         //return redirect()->route('posts.show',$category->id);
         return redirect()->route('categories.index');
     }
@@ -83,7 +82,7 @@ class CategoryController extends Controller{
         $category=Category::find($id);
         Storage::delete($category->picture);
         $category->delete();
-        Session::flash('success','Category Successfully Deleted');
+        Session::flash('success','Kategori Silindi');
         return redirect()->route('categories.index');
     } 
     public function self_url($title){

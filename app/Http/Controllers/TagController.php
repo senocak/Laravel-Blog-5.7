@@ -24,7 +24,7 @@ class TagController extends Controller
         $tags->name=$request->name;
         $tags->save();
         //redirect
-        Session::flash('success','New Tag Added');
+        Session::flash('success','Etiket Eklendi');
         return redirect()->route('tags.index');
     }
     public function show($id){
@@ -42,14 +42,14 @@ class TagController extends Controller
         $tag->name=$request->name;
         $tag->save();
         //redirect
-        Session::flash('success','Tag Updated');
+        Session::flash('success','Etiket Güncellendi');
         return redirect()->route('tags.index');
     }
     public function destroy($id){
         $tag=Tag::find($id);
         $tag->posts()->detach();
         $tag->delete();
-        Session::flash('success','Tag Deleted');
+        Session::flash('success','Etiket Silindi');
         return redirect()->route('tags.index');
     }
 }

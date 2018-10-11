@@ -79,7 +79,7 @@ class PagesController extends Controller{
       $message->to('anil@bilgimedya.com.tr');
       $message->subject($data['subject']);
     });
-    Session::flash('success','Your Email Successfully Sent');
+    Session::flash('success','Mesaj Gönderildi');
     return redirect('contact');
   }
   public function self_url($title){
