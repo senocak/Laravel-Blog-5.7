@@ -15,7 +15,7 @@ class PagesController extends Controller{
   }
   public function getIndex(){
     //$posts=Post::orderBy('created_at','desc')->limit(6)->get();
-    $posts=Post::orderBy('fixed','desc')->orderBy('id','desc')->paginate(6);
+    $posts=Post::orderBy('fixed','desc')->orderBy('id','desc')->paginate(9);
     $category=Category::all();
     return view("pages.welcome")->withPosts($posts)->withCategory($category);
   }

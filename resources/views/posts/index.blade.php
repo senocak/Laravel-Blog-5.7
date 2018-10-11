@@ -1,17 +1,13 @@
 @extends('main')
 @section('title',' | All Posts')
-
 @section('stylesheet')
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<style type="text/css">.sortable { cursor: move; }</style>
 @endsection
-
 @section('content')
-
-<div id="alert"></div>
-<?php $sayac=0; ?>
-<br>
+	<div id="alert"></div><br>
+	<?php $sayac=0; ?>
 	<a href="{{ route('posts.create') }}" class="w3-btn w3-blue-grey w3-block">Create Post</a>	
 	<table class="w3-table-all">
 	    <tr>
@@ -20,6 +16,7 @@
 		      	<th>Başlık</th> 
 		      	<th>Kategori</th> 
 		      	<th>Tarih</th>
+		      	<th>Sabitle</th>
 		     	<th></th>
 	     	</thead>
 	    </tr>
@@ -32,6 +29,12 @@
 	    			<td>{{ $post->title }}</td>
 	    			<th>{{ $post->category["name"] }}</th>
 	    			<td>{{ date('M j, Y',strtotime($post->created_at)) }}</td>
+	    			<td>
+	    				@if($post->fixed=="0")<a href="/posts/{{$post->id}}/fixed" ><i class="fa fa-plus w3-button w3-blue w3-tiny"></i></a>
+	    				@else
+	    				<a href="/posts/{{$post->id}}/fixed" ><i class="fa fa-minus w3-button w3-gray w3-tiny"></i></a>
+	    				@endif
+	    			</td>
 	    			<td><a href="/posts/{{$post->id}}/edit" class="w3-button w3-khaki">Düzenle</a></td>
 	    		</tr>
 	    	@endforeach

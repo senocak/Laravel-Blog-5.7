@@ -18,6 +18,7 @@ Route::get('/comments/{id}/delete',['uses'=>'CommentsController@delete','as'=>'c
 
 Route::get('/category/{slug?}',['uses'=>'CategoryController@getPost','as'=>'category.getPost']);
 Route::get('/posts/{id}/delete',['uses'=>'PostController@getDelete','as'=>'posts.getDelete']);
+Route::get('/posts/{id}/fixed',['uses'=>'PostController@fixed','as'=>'posts.fixed']);
 Route::get('/categories/{id}/delete',['uses'=>'CategoryController@getDelete','as'=>'categories.getDelete']);
 
 Auth::routes(['register'=>false]);

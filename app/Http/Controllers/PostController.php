@@ -110,4 +110,18 @@ class PostController extends Controller{
         //return redirect()->route('posts.index');
         return array( 'islemSonuc' => true , 'islemMsj' => 'İçeriklerin sırala işlemi güncellendi' );
     }
+    public function fixed ($id){
+        $post=Post::find($id);
+        $fixed=$post->fixed;
+        $fixed2="";
+        if($fixed=="1"){
+            $fixed2="0";
+        }else{
+            $fixed2="1";
+        }
+        $post->fixed=$fixed2;
+        $post->save();
+        Session::flash('success','Yazı Güncellendi');
+        return redirect()->route('posts.index');
+    }
 }
