@@ -12,16 +12,16 @@
     </div> 
   </div>
   <div class="w3-bar-block">
-    <a href="/" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="")echo "w3-blue"; ?>"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Home</a>
-    <a href="/about" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="about")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>About</a>
-    <a href="/contact" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="contact")echo "w3-blue"; ?>"><i class="fa fa-envelope fa-fw w3-margin-right"></i>Contact</a>
+    <a href="/" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="")echo "w3-blue"; ?>"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Anasayfa</a>
+    <a href="/about" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="about")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Hakkımda</a>
+    <a href="/contact" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="contact")echo "w3-blue"; ?>"><i class="fa fa-envelope fa-fw w3-margin-right"></i>İletişim</a>
 
     @if(Auth::check()) 
-      <a href="/posts" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="posts" or Request::segment(1)=="blog")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Posts</a>
-      <a href="/categories" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="categories")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Categories</a>
-      <a href="/tags" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="tags")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Tags</a>
+      <a href="/posts" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="posts" or Request::segment(1)=="blog")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Yazılar</a>
+      <a href="/categories" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="categories")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Kategoriler</a>
+      <a href="/tags" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="tags")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Etiketler</a>
     @else
-      <a href="/login" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="login")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Login</a>
+      <a href="/login" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="login")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Giriş Yap</a>
     @endif
   </div>
 </nav>

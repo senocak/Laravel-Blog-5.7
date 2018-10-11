@@ -15,7 +15,7 @@
         <div class="w3-display-bottomright w3-container w3-tag">{{count($post->comments)}}</div>
       </div>
       <div class="w3-container w3-white">
-        <p><b>{{$post->title}}</b></p>
+        <p><b>@if($post->fixed=="1")<img title="Sabit Öğe" style="float:right;width:20px;" src="https://image.flaticon.com/icons/svg/53/53833.svg"> @endif {{$post->title}} </b></p>
         <?php
         $kelime=200;
         $icerik=strip_tags($post->body);

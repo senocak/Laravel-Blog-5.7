@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller{
     public function getIndex(){
-    	$post=Post::orderBy('id','desc')->paginate(6);
+    	$post=Post::orderBy('fixed','desc')->orderBy('id','desc')->paginate(6);
     	$category=Category::all();
     	return view('blog.index')->withPosts($post)->withCategory($category);
     }
