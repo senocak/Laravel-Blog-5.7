@@ -91,8 +91,8 @@ class PostController extends Controller{
         return redirect()->route('posts.index');
     }
     public function self_url($title){
-        $search = array(" ","ö","ü","ı","ğ","ç","ş","/","?","Ö","Ü","I","Ğ","Ç","Ş","&","'","S");
-        $replace = array("-","o","u","i","g","c","s","-","","o","u","i","g","c","s","-","","s");
+        $search = array(" ","ö","ü","ı","ğ","ç","ş","/","?","Ö","Ü","I","Ğ","Ç","Ş","&","'","S",",");
+        $replace = array("-","o","u","i","g","c","s","-","","o","u","i","g","c","s","-","","s","");
         $new_text = str_replace($search,$replace,trim($title));
         return $new_text;
     }

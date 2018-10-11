@@ -8,9 +8,8 @@
 @endsection
 
 @section('content')
-	<div id="alert"></div>
+	<div id="alert"></div><br>
 	<?php $sayac=0; ?> 
-	<br>
 	<script type="text/javascript">
 		function showimagepreview(input) {
 			if (input.files && input.files[0]) {
@@ -79,12 +78,11 @@
 		</div>
 	 	<div class="w3-right w3-teal" style="width:30%">
 	 		{!! Form::open(['route'=>'categories.store','method'=>'POST','files'=>true]) !!} 
-	 		<img src="../images/no-image.png" style="width:320px" id="imgview" >
+	 		<img src="{{url('/')}}/images/no-image.png" style="width:320px" id="imgview" >
 	 		{{ Form::file('img',['class'=>'w3-input','required'=>'required','onChange'=>'showimagepreview(this)'])}}
 	 		{{ Form::text('name',null,['class'=>'w3-input','placeholder'=>'New Category','required'=>'required']) }}
 	 		{{ Form::submit('New Category',['class'=>'w3-button w3-green']) }}
 	 		{!! Form::close() !!}
-
 	 	</div> 
 	</div> 
 @endsection

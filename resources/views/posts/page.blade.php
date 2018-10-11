@@ -3,7 +3,6 @@
     @else
         <a href="{{ $paginator->previousPageUrl() }}" class="w3-button">&laquo;</a>
     @endif
-
     @foreach ($elements as $element)
         @if (is_string($element))
             <a class="w3-button w3-disabled">{{ $element }}</a>
@@ -11,7 +10,7 @@
         @if (is_array($element))
             @foreach ($element as $page => $url)
                 @if ($page == $paginator->currentPage())
-                    <a class="w3-button w3-red">{{ $page }}</a>
+                    <a class="w3-button w3-black">{{ $page }}</a>
                 @else
                     <a href="{{ $url }}" class="w3-button">{{ $page }}</a>
                 @endif

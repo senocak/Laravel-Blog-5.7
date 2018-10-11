@@ -17,8 +17,8 @@
 @section('content')
 	{!! Form::model($post,['route'=>['posts.update',$post->id],'method'=>'PUT']) !!}
 		<div class="w3-card-4 w3-margin w3-white"> 
-			<div class="w3-display-container" style="background-image: url(../../images/{{ $post->category['picture'] }});width: 100%;"> 
-				<img class="w3-display-container" src="../../images/{{ $post->category['picture'] }}" style="width:100%">
+			<div class="w3-display-container" style="width: 100%;"> 
+				<img class="w3-display-container" src="{{url('/')}}/images/{{ $post->category['picture'] }}" style="width:100%">
 				<div class="w3-display-bottomleft w3-container w3-khaki">
 					Oluşturma: <span class="w3-opacity">{{ date('M j, Y H:ia',strtotime($post->created_at)) }}</span><br>
 					Güncelleme: <span class="w3-opacity">{{ date('M j, Y H:ia',strtotime($post->updated_at)) }}</span>
@@ -52,12 +52,12 @@
 		CKEDITOR.replace('editor1',{
 			filebrowserWindowWidth: '900',
 			filebrowserWindowHeight: '400',
-			filebrowserBrowseUrl: '../../editor/ckfinder/ckfinder.html',
-			filebrowserImageBrowseUrl: '../../editor/ckfinder/ckfinder.html?Type=Images',
-			filebrowserFlashBrowseUrl: '../../editor/ckfinder/ckfinder.html?Type=Flash',
-			filebrowserUploadUrl: '../../editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-			filebrowserImageUploadUrl: '../../editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
-			filebrowserFlashUploadUrl: '../../editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+			filebrowserBrowseUrl: '{{url('/')}}/editor/ckfinder/ckfinder.html',
+			filebrowserImageBrowseUrl: '{{url('/')}}/editor/ckfinder/ckfinder.html?Type=Images',
+			filebrowserFlashBrowseUrl: '{{url('/')}}/editor/ckfinder/ckfinder.html?Type=Flash',
+			filebrowserUploadUrl: '{{url('/')}}/editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+			filebrowserImageUploadUrl: '{{url('/')}}/editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+			filebrowserFlashUploadUrl: '{{url('/')}}/editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
 		}); 
 	</script>
 @endsection
