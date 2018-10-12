@@ -91,7 +91,6 @@ class CategoryController extends Controller{
             $category=Category::all();
             return view('categories.post')->withPosts($post)->withCategory($category);
         }
-            
     }
     public function getDelete($id){
         $category=Category::find($id);

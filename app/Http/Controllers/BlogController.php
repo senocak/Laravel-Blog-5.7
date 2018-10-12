@@ -17,7 +17,7 @@ class BlogController extends Controller{
             $post=Post::orderBy('fixed','desc')->orderBy('id','desc')->paginate(9);
             return view('blog.index')->withPosts($post)->withCategory($category);
         }else{
-            return view('blog.single')->withPosts($post)->withCategory($category);
+            return view('blog.single')->withPost($post)->withCategory($category);
         }
     }
 }
