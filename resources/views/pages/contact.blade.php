@@ -1,5 +1,5 @@
 @extends('main')
-@section('title',' | Contact Page')
+@section('title',' | İletişim')
 @section('content')
 	<style>
 		body {font-family: Arial, Helvetica, sans-serif;}

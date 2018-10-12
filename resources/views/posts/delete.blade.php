@@ -1,5 +1,5 @@
 @extends('main')
-@section('title',' | Delete Post')
+@section('title',' | Yazı Sil')
 @section('content')
 	<br><h1 class="w3-center">Yazıyı silmek istediğinize emin misiniz?</h1>
 	{!! Form::open(['route'=>['posts.destroy',$post->id],'method'=>'DELETE']) !!}

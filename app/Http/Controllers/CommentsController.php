@@ -36,7 +36,6 @@ class CommentsController extends Controller{
         $comment->name=$request->name;
         $comment->email=$request->email;
         $comment->comment=$request->comment;
-        //$comment->post_id=$post_id;
         $comment->approved=true;
         $comment->post()->associate($post);
         $comment->save();
@@ -44,7 +43,8 @@ class CommentsController extends Controller{
         return redirect()->route('blog.single',[$post->slug]);
     }
     public function show($id){
-        return $this->index();
+        $comments=Comment::where('post_id','=',$id)->get();
+        return view('comments.index')->withComments($comments);
     }
     public function edit($id){
         $comment=Comment::find($id);

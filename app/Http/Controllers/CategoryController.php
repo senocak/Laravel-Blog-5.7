@@ -89,7 +89,7 @@ class CategoryController extends Controller{
             $c_id=$category_id->id;
             $post=Post::where('category_id','=',$c_id)->paginate(6);
             $category=Category::all();
-            return view('categories.post')->withPosts($post)->withCategory($category);
+            return view('categories.post')->withPosts($post)->withCategory($category)->withSlug($slug);
         }
     }
     public function getDelete($id){

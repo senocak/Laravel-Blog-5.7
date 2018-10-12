@@ -1,5 +1,5 @@
 @extends('main')
-@section('title'," | $category->name Tag")
+@section('title'," | $category->name Kategorisi")
 @section('content')
 	<br>
 	<script type="text/javascript">

@@ -1,5 +1,5 @@
 @extends('main')
-@section('title',' | All Posts')
+@section('title',' | Tüm Yazılar')
 @section('stylesheet')
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -28,15 +28,13 @@
 	    		<tr class="w3-hover-black" id="item-{{ $post->id }}">
 	    			<th class="sortable"><?php echo $sayac;?></th>
 	    			<td style="width: 25%">{{ $post->title }}</td>
-	    			<th><a href="/categories/{{ $post->category["id"] }}/edit" target="_blank">{{ $post->category["name"] }}</a></th>
+	    			<th><a href="/categories/{{ $post->category["id"] }}/edit" target="_blank" class="w3-button w3-small">{{ $post->category["name"] }}</a></th>
 	    			<td>{{ date('M j, Y',strtotime($post->created_at)) }}</td>
-	    			<td>
+	    			<th>
 	    				@if(count($post->comments)>0)
 	    					<a href="/comments/{{ $post->id }}" class="w3-button w3-tiny w3-brown">{{ count($post->comments) }}</a>
-	    				@else
-	    					-
 	    				@endif
-	    			</td>
+	    			</th>
 	    			<td>
 	    				@if($post->fixed=="0")<a href="/posts/{{$post->id}}/fixed" ><i class="fa fa-plus w3-button w3-blue w3-tiny"></i></a>
 	    				@else

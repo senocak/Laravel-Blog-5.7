@@ -1,8 +1,8 @@
 @extends('main')
-@section('title',' | View Post')
+@section('title',' | Yazı Görüntüle')
 @section('content') 
 	<div class="w3-card-4 w3-margin w3-white"> 
-		<div class="w3-display-container" style="background-image: url(../images/{{ $post->category['picture'] }});width: 100%;">
+		<div class="w3-display-container" style="background-image: url({{ url("/") }}/images/{{ $post->category['picture'] }});width: 100%;">
 			<img class="w3-display-container" src="../images/{{ $post->category['picture'] }}" style="width:100%">
 			<div class="w3-display-topleft w3-container w3-khaki">
 				<h3>{{ $post->category['name'] }}</h3>
@@ -16,14 +16,13 @@
 			</div>
 		</div>
 		<div class="w3-container" style="text-align:justify">
-			<h3><b><a href="{{ url($post->slug) }}">{{ $post->title }}</a></b></h3> 
+			<h3><b><a href="{{ url("/blog/$post->slug") }}">{{ $post->title }}</a></b></h3> 
 			@foreach($post->tags as $tag)
 				<span class="w3-tag">{{$tag->name}}</span>
 			@endforeach
 			<p>{!! $post->body !!}</p>
 		</div> 
 	</div>
-
 	@foreach($post->comments as $comment)
 		<div class="w3-margin w3-card-4">
 			<header class="w3-container w3-light-grey">
@@ -33,12 +32,9 @@
 					{{$comment->name}} ({{$comment->email}}) 
 					<small style="font-size: 11px; ">{{ date('F nS, Y - g:i a',strtotime($comment->created_at)) }}</small>
 				</h3>
-
 			</header>
-
 			<div class="w3-container">
-				<!--<img src="http://127.0.0.1:8000/svg/user.png" alt="Avatar" class="w3-left w3-circle" style="width: 50px;">-->
-				<img src="{{"https://www.gravatar.com/avatar/".md5(strtolower(trim($comment->email)))}}"  class="w3-left w3-circle" style="width: 50px;">
+				<img src="{{url('/')}}/svg/user.png" alt="Avatar" class="w3-left w3-circle" style="width: 50px;">
 			  	<p>{{$comment->comment}}</p>
 			</div>
 		</div>

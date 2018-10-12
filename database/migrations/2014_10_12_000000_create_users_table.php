@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->text('about');
             $table->integer('admin');
+            $table->string('linkedin');
         });
     }
 

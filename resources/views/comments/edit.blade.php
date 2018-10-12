@@ -1,5 +1,5 @@
 @extends('main')
-@section('title',' | Edit Comment')
+@section('title',' | Yorum Güncelle')
 @section('content')
 	@if($comment)
 		<br>

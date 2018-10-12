@@ -1,5 +1,5 @@
 @extends('main')
-@section('title',' | Home Page')
+@section('title'," | $slug Kategorisi")
 @section('content')
   <?php $i=0; ?>
    @foreach($posts as $post)

@@ -1,5 +1,5 @@
 @extends('main')
-@section('title',' | About Page')
+@section('title',' | Hakkımda')
 @section('content')
 	{!! $data["about"] !!}
 @endsection

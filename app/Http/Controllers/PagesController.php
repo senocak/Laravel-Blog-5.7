@@ -9,6 +9,7 @@ use Session;
 use Auth;
 use Image; 
 use Storage;
+use Cache;
 class PagesController extends Controller{
   public function __construct(){
     $this->middleware('auth',['except' => ['getAbout','getContact','getIndex','postContact']]);
@@ -16,6 +17,7 @@ class PagesController extends Controller{
   public function getIndex(){
     $posts=Post::orderBy('fixed','desc')->orderBy('id','desc')->paginate(9);
     $category=Category::all();
+    $this->site_settings = "ad";
     return view("pages.welcome")->withPosts($posts)->withCategory($category);
   }
   public function getAbout(){

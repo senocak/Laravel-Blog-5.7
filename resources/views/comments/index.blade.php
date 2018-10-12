@@ -1,11 +1,7 @@
 @extends('main')
-@section('title',' | Comments Page')
+@section('title',' | Yorum Sayfası')
 @section('content')
-
 	<br><br>
-	<?php 
-	$sayac=0; 
-	?>
 	<table class="w3-table-all">
 		<tr>
 		 	<thead>
@@ -18,6 +14,7 @@
 		 	</thead>
 		</tr>
 		<tbody id="sortable">
+			<?php $sayac=0; ?>
 			@foreach($comments as $comment)
 				<?php 
 				$sayac++;
@@ -49,6 +46,4 @@
 			@endforeach
 		</tbody> 
 	</table>
-
-
 @endsection

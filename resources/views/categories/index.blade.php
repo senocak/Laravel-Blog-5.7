@@ -1,5 +1,5 @@
 @extends('main')
-@section('title',' | All categorys')
+@section('title',' | Tüm Kategoriler')
 @section('stylesheet')
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>

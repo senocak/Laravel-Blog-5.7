@@ -1,9 +1,8 @@
 @extends('main')
-@section('title',' | Edit Post')
+@section('title',' | Yazı Düzenle')
 @section('stylesheet')
 	{!! Html::style('css/parsley.css') !!} 
 	{!! Html::style('css/select2.css') !!}
-	
 	{!! Html::style('editor/ckeditor/ckeditor.css') !!}
 	{!! Html::script('editor/ckeditor/ckeditor.js') !!}
 	<script>
@@ -28,13 +27,10 @@
 			<div class="w3-container">
 				{{ Form::label('title','Başlık') }}
 				{{ Form::text('title',null,["class"=>"w3-input w3-gray"]) }} 
-
 				{{Form::label('category_id','Kategori:')}}
 			    {{Form::select('category_id',$categories,null,['class'=>'w3-input w3-gray'])}}
-
 			    {{Form::label('tags','Tag:')}}
 			    {{Form::select('tags[]',$tags,null,['class'=>'w3-input select2-multi','multiple'=>'multiple'])}}
- 		   	 
 				{{ Form::label('body','İçerik') }}
 				{{ Form::textarea('body',null,["class"=>"ckeditor",'id'=>'editor1']) }}
 			</div> 
@@ -46,7 +42,6 @@
 @section('scripts')
 	{!! Html::script('js/parsley.js') !!}
 	{!! Html::script('js/select2.js') !!}
-
 	<script type="text/javascript">	$('.select2-multi').select2(); </script>
 	<script language="javascript" type="text/javascript">
 		CKEDITOR.replace('editor1',{

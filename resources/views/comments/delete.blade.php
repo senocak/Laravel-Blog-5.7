@@ -1,5 +1,5 @@
 @extends('main')
-@section('title',' | Delete Comment')
+@section('title',' | Yorum Sil')
 @section('content')
 	@if($comment)
 		<br><h1>Yorumu silmek istediğinize emin misiniz?</h1>

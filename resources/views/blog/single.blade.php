@@ -8,10 +8,12 @@
 	<div class="w3-card-4 w3-margin w3-white"> 
 		<div class="w3-display-container" style="width: 100%;">
 			<img class="w3-display-container" src="{{url('/')}}/images/{{ $post->category['picture'] }}" style="width:100%">
-			<div class="w3-display-topleft w3-container w3-khaki"><h3>{{ $post->category['name'] }}</h3></div>
+			<a href="{{url('/')}}/category/{{ $post->category['slug'] }}" class="w3-button w3-display-topleft w3-black">{{ $post->category['name'] }}</a>
 			<div class="w3-display-bottomright w3-container w3-white">
-				Created At: <span class="w3-opacity">{{ date('M j, Y H:ia',strtotime($post->created_at)) }}</span><br>
-				Last Updated: <span class="w3-opacity">{{ date('M j, Y H:ia',strtotime($post->updated_at)) }}</span>
+				<span class="w3-opacity">Son Güncelleme: </span><b>{{ date('d M Y - H:i',strtotime($post->updated_at)) }}</b>
+			</div>
+			<div class="w3-display-bottomleft w3-container w3-white">
+				<span class="w3-opacity">Yazılma Tarihi: </span><b>{{ date('d M Y - H:i',strtotime($post->created_at)) }}</b>
 			</div>
 		</div>
 		<div class="w3-container" style="text-align:justify">
@@ -24,9 +26,11 @@
 	</div> 
 	@foreach($post->comments as $comment)
 		<div class="w3-margin w3-card-4 w3-white">
-			<header class="w3-container "><h3>{{$comment->name}} <small style="font-size: 11px; ">{{ date('F nS, Y - g:i a',strtotime($comment->created_at)) }}</small></h3></header>
+			<header class="w3-container "><h3>{{$comment->name}} <small style="font-size: 15px; " class="w3-right">{{ date('n F Y - G:i',strtotime($comment->created_at)) }}</small></h3></header>
 			<div class="w3-container">
-				<img src="{{"https://www.gravatar.com/avatar/".md5(strtolower(trim($comment->email)))}}" class="w3-left w3-circle" style="width: 80px;"> <p>{{$comment->comment}}</p>
+				<!--<img src="{{"https://www.gravatar.com/avatar/".md5(strtolower(trim($comment->email)))}}" class="w3-left w3-circle" style="width: 80px;">-->
+				<img src="{{url('/')}}/svg/user.png" alt="Avatar" class="w3-left w3-circle" style="width: 80px;">
+				<p>{{$comment->comment}}</p>
 			</div>
 		</div>
 	@endforeach

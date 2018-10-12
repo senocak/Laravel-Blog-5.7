@@ -1,11 +1,11 @@
 @extends('main')
-@section('title',' | All Tags')
+@section('title',' | Tüm Etiketler')
 @section('content')
 	<br>
 	{!! Form::open(['route'=>'tags.store','method'=>'POST']) !!} 
-		{{Form::label('name','Tag Başlığı:',['class'=>'w3-left w3-button w3-khaki','style'=>'width:15%'])}}
-		{{ Form::text('name',null,['class'=>'w3-input w3-left','placeholder'=>'Tag Başlığı','style'=>'width:50%']) }}
-		{{ Form::submit('Yeni Tag Ekle',['class'=>'w3-button w3-green']) }}
+		{{Form::label('name','Etiket Başlığı:',['class'=>'w3-left w3-button w3-khaki','style'=>'width:15%'])}}
+		{{ Form::text('name',null,['class'=>'w3-input w3-left','placeholder'=>'Etiket Başlığı','style'=>'width:50%']) }}
+		{{ Form::submit('Yeni Etiket Ekle',['class'=>'w3-button w3-green']) }}
 	{!! Form::close() !!} 
 	<br>
 	<?php $i=1; ?>
@@ -14,7 +14,7 @@
 		    <tr>
 		     	<thead>
 					<th>#</th>
-			      	<th>Başlık</th>
+			      	<th>İşlemler</th>
 			      	<th class="w3-center">Gönderi</th> 
 		     	</thead>
 		    </tr>
@@ -29,10 +29,9 @@
 		    				{{Form::model($tag,['route'=>['tags.update',$tag->id],'method'=>'PUT'])}}
 								{{Form::text('name',null,['class'=>'w3-input w3-left','style'=>'width:35%'])}}
 						  		{{Form::submit('Kaydet',['class'=>'w3-button w3-green'])}}
-						  		<a href="{{ route('tags.show',$tag->id) }}" class="w3-button w3-khaki" >Yazılar</a>
 						  	{{Form::close()}}
 		    			</th> 
-		    			<th class="w3-center"><small>{{$tag->posts->count()}} Yazı</small></th>
+		    			<th class="w3-center"><small><a href="{{ route('tags.show',$tag->id) }}" class="w3-button w3-khaki" >{{$tag->posts->count()}} Yazı</a></small></th>
 		    		</tr>
 		    		<?php $i++; ?>
 		    	@endforeach

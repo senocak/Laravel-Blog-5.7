@@ -1,5 +1,5 @@
 @extends('main')
-@section('title'," | $tags->name Tag")
+@section('title'," | $tags->name Etiketi")
 @section('content')
 	<h1>{{ $tags->name }} <small class="w3-tag">{{$tags->posts->count()}} Yazı</small></h1>
 	<br><br>
@@ -8,7 +8,7 @@
 	     	<thead>
 				<th>#</th>
 		      	<th>Başlık</th>
-		      	<th>Taglar</th>
+		      	<th>Etiket</th>
 		      	<th></th>
 	     	</thead>
 	    </tr>
