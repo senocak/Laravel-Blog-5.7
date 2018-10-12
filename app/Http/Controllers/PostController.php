@@ -20,15 +20,12 @@ class PostController extends Controller{
         return view('posts.create')->withCategories($categories)->withTags($tags);
     }
     public function store(Request $request){
-        //dd($request);
-        //validate data
         $this->validate($request,array(
           'title'       => 'required|max:255',
           'slug'        => 'alpha_dash|min:5|max:255|unique:posts,slug', 
           'category_id' => 'required|integer',
           'body'        => 'required'
         ));
-        //store in db
         $post=new Post;
         $post->title=$request->title;
         $post->slug=$this->self_url(($request->title));
@@ -36,9 +33,7 @@ class PostController extends Controller{
         $post->category_id=$request->category_id;
         $post->save();
         $post->tags()->sync($request->tags,false);
-        //redirect
         Session::flash('success','Yazı Kaydedildi.');
-        //return redirect()->route('posts.show',$post->id);
         return redirect()->route('posts.index');
     }
     public function show($id){
@@ -67,10 +62,8 @@ class PostController extends Controller{
           'category_id' => 'required|integer',
           'body'  => 'required'
         ));
-        //store in db
         $post=Post::find($id);
         $post->title=$request->input('title');
-        //$post->slug=$this->self_url(strtolower($request->input('title')));
         $post->slug=$this->self_url(($request->title));
         $post->title=$request->input('title');
         $post->body=$request->body;
@@ -78,9 +71,7 @@ class PostController extends Controller{
         $post->save();
 
         $post->tags()->sync($request->tags);
-        //redirect
         Session::flash('success','Yazı Güncellendi');
-        //return redirect()->route('posts.show',$post->id);
         return redirect()->route('posts.index');
     }
     public function destroy($id){
@@ -107,7 +98,6 @@ class PostController extends Controller{
             $post->save();    
         }
         Session::flash('success','İçeriklerin sırala işlemi güncellendi');
-        //return redirect()->route('posts.index');
         return array( 'islemSonuc' => true , 'islemMsj' => 'İçeriklerin sırala işlemi güncellendi' );
     }
     public function fixed ($id){

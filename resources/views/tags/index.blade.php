@@ -3,9 +3,9 @@
 @section('content')
 	<br>
 	{!! Form::open(['route'=>'tags.store','method'=>'POST']) !!} 
-	{{Form::label('name','Tag Başlığı:',['class'=>'w3-left w3-button w3-khaki','style'=>'width:15%'])}}
-	{{ Form::text('name',null,['class'=>'w3-input w3-left','placeholder'=>'New Tag','style'=>'width:50%']) }}
-	{{ Form::submit('New Tag',['class'=>'w3-button w3-green']) }}
+		{{Form::label('name','Tag Başlığı:',['class'=>'w3-left w3-button w3-khaki','style'=>'width:15%'])}}
+		{{ Form::text('name',null,['class'=>'w3-input w3-left','placeholder'=>'Tag Başlığı','style'=>'width:50%']) }}
+		{{ Form::submit('Yeni Tag Ekle',['class'=>'w3-button w3-green']) }}
 	{!! Form::close() !!} 
 	<br>
 	<?php $i=1; ?>
@@ -15,7 +15,7 @@
 		     	<thead>
 					<th>#</th>
 			      	<th>Başlık</th>
-			      	<th>Gönderi</th> 
+			      	<th class="w3-center">Gönderi</th> 
 		     	</thead>
 		    </tr>
 		    <tbody>
@@ -33,8 +33,7 @@
 						  		<a href="{{ route('tags.show',$tag->id) }}" class="w3-button w3-khaki">Gör</a>
 						  	{{Form::close()}}
 		    			</th> 
-		    			<th><small>{{$tag->posts->count()}} Yazı</small></th>
-	    				
+		    			<th class="w3-center"><small>{{$tag->posts->count()}} Yazı</small></th>
 		    		</tr>
 		    		<?php $i++; ?>
 		    	@endforeach

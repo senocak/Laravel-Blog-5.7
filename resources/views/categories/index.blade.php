@@ -24,9 +24,9 @@
 		    <tr>
 		     	<thead>
 					<th>#</th>
-			      	<th>Img</th> 
-			      	<th>Title</th> 
-			      	<th>Created At</th>
+			      	<th>Resim</th> 
+			      	<th>Başlık</th> 
+			      	<th>Tarih</th>
 			     	<th></th>
 		     	</thead>
 		    </tr>
@@ -80,8 +80,8 @@
 	 		{!! Form::open(['route'=>'categories.store','method'=>'POST','files'=>true]) !!} 
 	 		<img src="{{url('/')}}/images/no-image.png" style="width:320px" id="imgview" >
 	 		{{ Form::file('img',['class'=>'w3-input','required'=>'required','onChange'=>'showimagepreview(this)'])}}
-	 		{{ Form::text('name',null,['class'=>'w3-input','placeholder'=>'New Category','required'=>'required']) }}
-	 		{{ Form::submit('New Category',['class'=>'w3-button w3-green']) }}
+	 		{{ Form::text('name',null,['class'=>'w3-input','placeholder'=>'Kategori İsmi','required'=>'required']) }}
+	 		{{ Form::submit('Yeni Ekle',['class'=>'w3-button w3-green']) }}
 	 		{!! Form::close() !!}
 	 	</div> 
 	</div> 

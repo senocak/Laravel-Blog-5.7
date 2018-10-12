@@ -12,10 +12,19 @@ class CommentsController extends Controller{
         $this->middleware('auth',['except'=>'store']);
     }
     public function index(){
-        //
+        $comments=Comment::all();
+        return view('comments.index')->withComments($comments);
     }
-    public function create(){
-        //
+    public function approved($id){
+        $comments=Comment::find($id);
+        if ($comments->approved=="1") {
+            $comments->approved="0";
+        }else{
+            $comments->approved="1";
+        }
+        $comments->save();
+        Session::flash('success','Yorum Güncellendi.');
+        return redirect()->route('comments.index');
     }
     public function store(Request $request,$post_id){
         $this->validate($request,array(
@@ -32,10 +41,7 @@ class CommentsController extends Controller{
         $comment->approved=true;
         $comment->post()->associate($post);
         $comment->save();
-
-        //redirect
         Session::flash('success','Yorum Eklendi');
-        //return redirect()->route('posts.show',$post->id);
         return redirect()->route('blog.single',[$post->slug]);
     }
     public function show($id){
@@ -50,10 +56,8 @@ class CommentsController extends Controller{
         $this->validate($request,array('comment'=> 'required|max:255'));
         $comment->comment=$request->comment;
         $comment->save();
-        //redirect
         Session::flash('success','Yorum Güncellendi');
-        //return redirect()->route('posts.show',$post->id);
-        return redirect()->route('posts.show',$comment->post->id); 
+        return redirect()->route('comments.index',$comment->post->id); 
     }
     public function delete($id){
         $comment=Comment::find($id);

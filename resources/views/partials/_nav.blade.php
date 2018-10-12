@@ -17,6 +17,7 @@
       <a href="/posts" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="posts" or Request::segment(1)=="blog")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Yazılar</a>
       <a href="/categories" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="categories")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Kategoriler</a>
       <a href="/tags" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="tags")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Etiketler</a>
+      <a href="/comments" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="comments")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Yorumlar</a>
     @else
       <a href="/login" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="login")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Giriş Yap</a>
     @endif

@@ -1,14 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Category;
 use App\Post;
 use Session;
 use Image; 
 use Storage; 
-
 class CategoryController extends Controller{
     public function __construct(){
         $this->middleware('auth');
@@ -17,9 +14,6 @@ class CategoryController extends Controller{
         $categories=Category::orderBy('sira','asc')->paginate(10);
         //$categories=Category::all();
         return view('categories.index')->withCategories($categories);
-    }
-    public function create(){
-        //
     }
     public function store(Request $request){
         $this->validate($request,array(
@@ -46,9 +40,6 @@ class CategoryController extends Controller{
         //return redirect()->route('posts.show',$category->id);
         return redirect()->route('categories.index');
     }
-    public function show($id){
-        //
-    }
     public function edit($id){
         $category=Category::find($id);
         return view('categories.edit')->withCategory($category);   
@@ -73,9 +64,7 @@ class CategoryController extends Controller{
             Storage::delete($oldfilename);
         }
         $category->save();
-        //redirect
         Session::flash('success','Kategori Güncellendi');
-        //return redirect()->route('posts.show',$category->id);
         return redirect()->route('categories.index');
     }
     public function destroy($id){
@@ -110,7 +99,6 @@ class CategoryController extends Controller{
             $category->save();    
         }
         Session::flash('success','İçeriklerin sırala işlemi güncellendi');
-        //return redirect()->route('posts.index');
         return array( 'islemSonuc' => true , 'islemMsj' => 'İçeriklerin sırala işlemi güncellendi' );
     }
 }

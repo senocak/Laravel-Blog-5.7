@@ -16,8 +16,9 @@
 		      	<th>Başlık</th> 
 		      	<th>Kategori</th> 
 		      	<th>Tarih</th>
+		      	<th>Yorum</th>
 		      	<th>Sabitle</th>
-		     	<th></th>
+		     	<th class="w3-center">İşlemler</th>
 	     	</thead>
 	    </tr>
 	    <tbody id="sortable">
@@ -25,17 +26,27 @@
 	    		<?php $sayac++ ;?>
 	    		<meta name="csrf-token" content="{{ csrf_token() }}">
 	    		<tr class="w3-hover-black" id="item-{{ $post->id }}">
-	    			<td class="sortable"><?php echo $sayac;?></td>
-	    			<td>{{ $post->title }}</td>
-	    			<th>{{ $post->category["name"] }}</th>
+	    			<th class="sortable"><?php echo $sayac;?></th>
+	    			<td style="width: 25%">{{ $post->title }}</td>
+	    			<th><a href="/categories/{{ $post->category["id"] }}/edit" target="_blank">{{ $post->category["name"] }}</a></th>
 	    			<td>{{ date('M j, Y',strtotime($post->created_at)) }}</td>
+	    			<td>
+	    				@if(count($post->comments)>0)
+	    					<a href="/comments/{{ $post->id }}" class="w3-button w3-tiny w3-brown">{{ count($post->comments) }}</a>
+	    				@else
+	    					-
+	    				@endif
+	    			</td>
 	    			<td>
 	    				@if($post->fixed=="0")<a href="/posts/{{$post->id}}/fixed" ><i class="fa fa-plus w3-button w3-blue w3-tiny"></i></a>
 	    				@else
 	    				<a href="/posts/{{$post->id}}/fixed" ><i class="fa fa-minus w3-button w3-gray w3-tiny"></i></a>
 	    				@endif
 	    			</td>
-	    			<td><a href="/posts/{{$post->id}}/edit" class="w3-button w3-khaki">Düzenle</a></td>
+	    			<td>
+	    				<a href="/posts/{{$post->id}}/edit" class="w3-button w3-khaki w3-tiny">Düzenle</a>
+	    				<a href="/posts/{{$post->id}}" class="w3-button w3-orange w3-tiny">Görüntüle</a>
+	    			</td>
 	    		</tr>
 	    	@endforeach
 	    </tbody> 

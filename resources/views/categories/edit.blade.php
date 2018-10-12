@@ -12,13 +12,13 @@
 		}
 	</script>
 	{{Form::model($category,['route'=>['categories.update',$category->id],'method'=>'PUT','files'=>true])}}
-		{{Form::label('name','Title:')}}
-		{{Form::text('name',null,['class'=>'w3-input'])}}
+		{{Form::label('name','Başlık:')}}
+		{{Form::text('name',null,['class'=>'w3-input','placeholder'=>'Başlık'])}}
 		<img src="{{url('/')}}/images/{{ $category->picture }}" style="width:250px"> -> 
 		<img src="{{url('/')}}/images/no-image.png" style="width:250px" id="imgview" >
 		{{ Form::file('img',['class'=>'w3-input','required'=>'required','onChange'=>'showimagepreview(this)'])}}
-  		{{Form::submit('Save Changes',['class'=>'w3-button w3-green'])}}
-  		<a href="/categories/{{$category->id}}/delete" class="w3-button w3-red">Delete</a>
+  		{{Form::submit('Kaydet',['class'=>'w3-button w3-green'])}}
+  		<a href="/categories/{{$category->id}}/delete" class="w3-button w3-red">Sil</a>
   	{{Form::close()}}
-	<br><a href="/categories" class="w3-button w3-khaki">Return The Categories</a>
+	<br><a href="/categories" class="w3-button w3-khaki">Kategorilere Dön</a>
 @endsection

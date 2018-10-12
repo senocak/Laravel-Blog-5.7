@@ -27,9 +27,9 @@
 	</style> 
   	<form action="{{url('contact')}}" method="POST">
   		{{csrf_field()}}
-	    <input type="text" id="subject" name="subject" placeholder="Subject">
-	    <input type="text" id="mail" name="email" placeholder="E-Mail">
-	    <textarea id="subject" name="bodyMessage" placeholder="Message" style="height:200px;resize: none"></textarea>
+	    <input type="text" id="subject" name="subject" placeholder="Subject" required="">
+	    <input type="text" id="mail" name="email" placeholder="E-Mail" required="">
+	    <textarea id="subject" name="bodyMessage" placeholder="Message" style="height:200px;resize: none" required=""></textarea>
 	    <input type="submit" value="Send Message">
   	</form> 
 @endsection 
