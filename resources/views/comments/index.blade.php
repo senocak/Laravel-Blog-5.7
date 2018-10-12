@@ -3,16 +3,14 @@
 @section('content')
 	<br><br>
 	<table class="w3-table-all">
-		<tr>
-		 	<thead>
-				<th>#</th>
-		      	<th>İsim</th> 
-		      	<th>Yazı</th> 
-		      	<th>Yorum</th> 
-		      	<th>Tarih</th> 
-		     	<th></th>
-		 	</thead>
-		</tr>
+	 	<thead>
+			<th>#</th>
+	      	<th>İsim</th> 
+	      	<th>Yazı</th> 
+	      	<th>Yorum</th> 
+	      	<th>Tarih</th> 
+	     	<th class="w3-center">İşlemler</th>
+	 	</thead>
 		<tbody id="sortable">
 			<?php $sayac=0; ?>
 			@foreach($comments as $comment)
@@ -28,9 +26,9 @@
 				?>
 				<meta name="csrf-token" content="{{ csrf_token() }}">
 				<tr class="w3-hover-black" id="item-{{ $comment->id }}">
-					<td class="sortable"><?php echo $sayac;?></td>
+					<th class="sortable"><?php echo $sayac;?></th>
 					<td><a href="mailto:{{ $comment->email }}">{{ $comment->name }}</a></td>
-					<th><a href="/blog/{{$comment->post["slug"] }}" target="_blank">{{$comment->post["title"] }}</a></th>
+					<th><a href="/blog/{{$comment->post["slug"] }}" target="_blank" class="w3-button">{{$comment->post["title"] }}</a></th>
 					<td>{{ $icerik }}</td>
 					<td>{{ date('d.m.Y',strtotime($comment->created_at)) }}</td>
 					<td style="width: 25%">

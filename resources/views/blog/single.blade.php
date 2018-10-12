@@ -25,14 +25,16 @@
 		</div> 
 	</div> 
 	@foreach($post->comments as $comment)
-		<div class="w3-margin w3-card-4 w3-white">
-			<header class="w3-container "><h3>{{$comment->name}} <small style="font-size: 15px; " class="w3-right">{{ date('n F Y - G:i',strtotime($comment->created_at)) }}</small></h3></header>
-			<div class="w3-container">
-				<!--<img src="{{"https://www.gravatar.com/avatar/".md5(strtolower(trim($comment->email)))}}" class="w3-left w3-circle" style="width: 80px;">-->
-				<img src="{{url('/')}}/svg/user.png" alt="Avatar" class="w3-left w3-circle" style="width: 80px;">
-				<p>{{$comment->comment}}</p>
+		@if($comment->approved=="1")
+			<div class="w3-margin w3-card-4 w3-white">
+				<header class="w3-container "><h3>{{$comment->name}} <small style="font-size: 15px; " class="w3-right">{{ date('n F Y - G:i',strtotime($comment->created_at)) }}</small></h3></header>
+				<div class="w3-container">
+					<!--<img src="{{"https://www.gravatar.com/avatar/".md5(strtolower(trim($comment->email)))}}" class="w3-left w3-circle" style="width: 80px;">-->
+					<img src="{{url('/')}}/svg/user.png" alt="Avatar" class="w3-left w3-circle" style="width: 80px;">
+					<p>{{$comment->comment}}</p>
+				</div>
 			</div>
-		</div>
+		@endif
 	@endforeach
 	<div class="w3-margin w3-card-4"> 
 		{{Form::open(['route'=>['comments.store',$post->id],'method'=>'POST'])}}

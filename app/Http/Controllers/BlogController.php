@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\Category;
 use Illuminate\Http\Request;
-
 class BlogController extends Controller{
     public function getIndex(){
     	$post=Post::orderBy('fixed','desc')->orderBy('id','desc')->paginate(9);
@@ -13,7 +12,7 @@ class BlogController extends Controller{
     public function getSingle($slug){
     	$post=Post::where('slug','=',$slug)->first();
         $category=Category::all();
-        if (!$post) {
+        if(!$post){
             $post=Post::orderBy('fixed','desc')->orderBy('id','desc')->paginate(9);
             return view('blog.index')->withPosts($post)->withCategory($category);
         }else{
