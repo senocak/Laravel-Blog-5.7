@@ -22,7 +22,11 @@ class TagController extends Controller{
     }
     public function show($id){
         $tags=Tag::find($id);
-        return view('tags.show')->withTags($tags);
+        if ($tags) {
+            return view('tags.show')->withTags($tags);
+        }else{
+            return $this->index();
+        }
     }
     public function edit($id){
         return redirect()->route('tags.index');

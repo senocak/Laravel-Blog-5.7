@@ -5,7 +5,6 @@ use App\Post;
 use App\Category;
 use App\Tag;
 use Session;
-
 class PostController extends Controller{
     public function __construct(){
         $this->middleware('auth');
@@ -38,24 +37,31 @@ class PostController extends Controller{
     }
     public function show($id){
         $post=Post::find($id);
-        return view('posts.show')->withPost($post);
+        if ($post) {
+            return view('posts.show')->withPost($post);
+        }else{
+            return $this->index();
+        }
     }
     public function edit($id){
         $post=Post::find($id);
-        $categories=Category::all();
-        $cats=array();
-        foreach ($categories as $category) {
-            $cats[$category->id]=$category->name;
-        }
-        $tags=Tag::all();
-        $tags2=array();
-        foreach ($tags as $tag) {
-            $tags2[$tag->id]=$tag->name;
-        }
-        return view("posts.edit")->withPost($post)->withCategories($cats)->withTags($tags2);
+        if ($post) {
+            $categories=Category::all();
+            $cats=array();
+            foreach ($categories as $category) {
+                $cats[$category->id]=$category->name;
+            }
+            $tags=Tag::all();
+            $tags2=array();
+            foreach ($tags as $tag) {
+                $tags2[$tag->id]=$tag->name;
+            }
+            return view("posts.edit")->withPost($post)->withCategories($cats)->withTags($tags2);
+        }else{
+            return $this->index();
+        } 
     }
     public function update(Request $request, $id){
-        //validate data
         $this->validate($request,array(
           'title' => 'required|max:255',
           'slug'  => '', 
@@ -69,7 +75,6 @@ class PostController extends Controller{
         $post->body=$request->body;
         $post->category_id=$request->input('category_id');
         $post->save();
-
         $post->tags()->sync($request->tags);
         Session::flash('success','Yazı Güncellendi');
         return redirect()->route('posts.index');
@@ -89,7 +94,11 @@ class PostController extends Controller{
     }
     public function getDelete($id){
         $post=Post::find($id);
-        return view("posts.delete")->withPost($post);
+        if ($post) {
+            return view("posts.delete")->withPost($post);
+        }else{
+            return $this->index();
+        } 
     }
     public function sortPosts(Request $request){
         foreach ( $request->item as $key => $value ){ 
@@ -102,16 +111,20 @@ class PostController extends Controller{
     }
     public function fixed ($id){
         $post=Post::find($id);
-        $fixed=$post->fixed;
-        $fixed2="";
-        if($fixed=="1"){
-            $fixed2="0";
+        if ($post) {
+            $fixed=$post->fixed;
+            $fixed2="";
+            if($fixed=="1"){
+                $fixed2="0";
+            }else{
+                $fixed2="1";
+            }
+            $post->fixed=$fixed2;
+            $post->save();
+            Session::flash('success','Yazı Güncellendi');
+            return redirect()->route('posts.index');
         }else{
-            $fixed2="1";
-        }
-        $post->fixed=$fixed2;
-        $post->save();
-        Session::flash('success','Yazı Güncellendi');
-        return redirect()->route('posts.index');
+            return $this->index();
+        }  
     }
 }

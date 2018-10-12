@@ -24,13 +24,12 @@
 		    			<th>{{ $i }}</th>
 		    			<th>
 						  	{{Form::open(['route'=>['tags.destroy',$tag->id],'method'=>'delete'])}}
-								{{Form::submit('Sil',['class'=>'w3-button w3-right w3-red'])}}
+								{{Form::submit('Sil',['class'=>'w3-button w3-right w3-red',"onclick"=>"return confirm('Tag Sil?')"])}}
 							{{Form::close()}} 
-
 		    				{{Form::model($tag,['route'=>['tags.update',$tag->id],'method'=>'PUT'])}}
 								{{Form::text('name',null,['class'=>'w3-input w3-left','style'=>'width:35%'])}}
 						  		{{Form::submit('Kaydet',['class'=>'w3-button w3-green'])}}
-						  		<a href="{{ route('tags.show',$tag->id) }}" class="w3-button w3-khaki">Gör</a>
+						  		<a href="{{ route('tags.show',$tag->id) }}" class="w3-button w3-khaki" >Gör</a>
 						  	{{Form::close()}}
 		    			</th> 
 		    			<th class="w3-center"><small>{{$tag->posts->count()}} Yazı</small></th>

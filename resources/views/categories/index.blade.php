@@ -1,12 +1,10 @@
 @extends('main')
 @section('title',' | All categorys')
-
 @section('stylesheet')
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 	<style type="text/css">.sortable { cursor: move; }</style>
 @endsection
-
 @section('content')
 	<div id="alert"></div><br>
 	<?php $sayac=0; ?> 
@@ -36,7 +34,7 @@
 	    			<meta name="csrf-token" content="{{ csrf_token() }}">
 		    		<tr class="w3-hover-black" id="item-{{ $category->id }}">
 		    			<td class="sortable">{{$sayac}}</td>
-		    			<td><img src="images/{{ $category->picture }}" style="width:150px"></td> 
+		    			<td><img src="{{url('/')}}/images/{{ $category->picture }}" style="width:150px"></td> 
 		    			<td>{{ $category->name }}</td> 
 		    			<td>{{ date('M j, Y',strtotime($category->created_at)) }}</td>
 		    			<td><a href="/categories/{{$category->id}}/edit" class="w3-button w3-khaki">Düzenle</a></td>

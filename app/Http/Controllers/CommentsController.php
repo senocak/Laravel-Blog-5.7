@@ -1,12 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Comment;
 use App\Post;
 use Session;
-
 class CommentsController extends Controller{
     public function __construct(){
         $this->middleware('auth',['except'=>'store']);
@@ -17,13 +14,15 @@ class CommentsController extends Controller{
     }
     public function approved($id){
         $comments=Comment::find($id);
-        if ($comments->approved=="1") {
-            $comments->approved="0";
-        }else{
-            $comments->approved="1";
+        if($comments){
+            if ($comments->approved=="1") {
+                $comments->approved="0";
+            }else{
+                $comments->approved="1";
+            }
+            $comments->save();
+            Session::flash('success','Yorum Güncellendi.');
         }
-        $comments->save();
-        Session::flash('success','Yorum Güncellendi.');
         return redirect()->route('comments.index');
     }
     public function store(Request $request,$post_id){
@@ -45,11 +44,15 @@ class CommentsController extends Controller{
         return redirect()->route('blog.single',[$post->slug]);
     }
     public function show($id){
-        //
+        return $this->index();
     }
     public function edit($id){
         $comment=Comment::find($id);
-        return view('comments.edit')->withComment($comment);        
+        if ($comment) {
+            return view('comments.edit')->withComment($comment);
+        }else{
+            return $this->index();
+        }
     }
     public function update(Request $request, $id){
         $comment=Comment::find($id);
@@ -61,13 +64,17 @@ class CommentsController extends Controller{
     }
     public function delete($id){
         $comment=Comment::find($id);
-        return view('comments.delete')->withComment($comment);
+        if ($comment) {
+            return view('comments.delete')->withComment($comment);
+        }else{
+            return $this->index();
+        }
     }
     public function destroy($id){
         $comment=Comment::find($id);
         $postid=$comment->post->id;
         $comment->delete();
         Session::flash('success','Yorum Silindi');
-        return redirect()->route('posts.show',$postid); 
+        return redirect()->route('comments.index');
     }
 }

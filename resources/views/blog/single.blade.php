@@ -40,7 +40,7 @@
 		{{Form::close()}}
 	</div>
 	<br><br>
-<div style="height: 265px;background-image: url({{url('/')}}/images/footer.png);background-position-x: -120px;background-position-y: 0px;"></div>
+	<div style="height: 265px;background-image: url({{url('/')}}/images/footer.png);background-position-x: -120px;background-position-y: 0px;"></div>
 @endsection
 @section('cat')
 	<header id="portfolio">

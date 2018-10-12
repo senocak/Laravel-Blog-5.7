@@ -1,11 +1,11 @@
 @extends('main')
 @section('title',' | Delete Post')
 @section('content')
-	<br><h1 class="w3-center">Are You Sure You Want To Delete This Post?</h1>
+	<br><h1 class="w3-center">Yazıyı silmek istediğinize emin misiniz?</h1>
 	{!! Form::open(['route'=>['posts.destroy',$post->id],'method'=>'DELETE']) !!}
 		<div class="w3-margin "> 
 			<div class="w3-container">
-				{{ Form::submit('Delete Post',["class"=>"w3-input w3-red"]) }}
+				{{ Form::submit('Sil',["class"=>"w3-input w3-red","onclick"=>"return confirm('Tag Sil?')"]) }}
 			</div> 
 		</div>
 	{!! Form::close() !!}

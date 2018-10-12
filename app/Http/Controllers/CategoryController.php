@@ -12,20 +12,20 @@ class CategoryController extends Controller{
     }
     public function index(){ 
         $categories=Category::orderBy('sira','asc')->paginate(10);
-        //$categories=Category::all();
         return view('categories.index')->withCategories($categories);
+    }
+    public function show(){ 
+        return $this->index();
     }
     public function store(Request $request){
         $this->validate($request,array(
           'name' => 'required|max:255',
           'img'  => 'required|image'
         ));
-        //store in db
         $category=new Category;
         $category->name=$request->name;
         $slug=$this->self_url(($request->name));
         $category->slug=$slug;
-
         if ($request->hasFile('img')) {
             $img=$request->file('img');
             $filename=$slug.".".$img->getClientOriginalExtension();
@@ -33,16 +33,17 @@ class CategoryController extends Controller{
             Image::make($img)->resize(1100,450)->save($location);
             $category->picture=$filename;
         }
-
         $category->save();
-        //redirect
         Session::flash('success','Yeni Kategori Eklendi');
-        //return redirect()->route('posts.show',$category->id);
         return redirect()->route('categories.index');
     }
     public function edit($id){
         $category=Category::find($id);
-        return view('categories.edit')->withCategory($category);   
+        if(!$category){
+            return $this->index();
+        }else{
+            return view('categories.edit')->withCategory($category);   
+        }
     }
     public function update(Request $request, $id){
         $this->validate($request,array(
@@ -82,15 +83,23 @@ class CategoryController extends Controller{
     }
     public function getPost($slug){
         $category_id=Category::where('slug','=',$slug)->first();
-        $c_id=$category_id->id;
-
-        $post=Post::where('category_id','=',$c_id)->paginate(6);
-        $category=Category::all();
-        return view('categories.post')->withPosts($post)->withCategory($category);
+        if(!$category_id){
+            return redirect()->route("blog.index");
+        }else{
+            $c_id=$category_id->id;
+            $post=Post::where('category_id','=',$c_id)->paginate(6);
+            $category=Category::all();
+            return view('categories.post')->withPosts($post)->withCategory($category);
+        }
+            
     }
     public function getDelete($id){
         $category=Category::find($id);
-        return view("categories.delete")->withCategory($category);
+        if (!$category) {
+            return $this->index();
+        }else{
+            return view("categories.delete")->withCategory($category);
+        }
     }
     public function sortPosts(Request $request){
         foreach ( $request->item as $key => $value ){ 

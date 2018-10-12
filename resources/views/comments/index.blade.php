@@ -1,5 +1,5 @@
 @extends('main')
-@section('title',' | Edit Comment')
+@section('title',' | Comments Page')
 @section('content')
 
 	<br><br>
@@ -36,14 +36,14 @@
 					<th><a href="/blog/{{$comment->post["slug"] }}" target="_blank">{{$comment->post["title"] }}</a></th>
 					<td>{{ $icerik }}</td>
 					<td>{{ date('d.m.Y',strtotime($comment->created_at)) }}</td>
-					<td>
+					<td style="width: 25%">
 						<a href="/comments/{{$comment->id}}/edit" class="w3-button w3-khaki w3-tiny">Düzenle</a>
+						<a href="/comments/{{$comment->id}}/delete" class="w3-button w3-red w3-tiny">Sil</a>
 						@if($comment->approved=="1")
 							<a href="/comments/{{$comment->id}}/approved" class="w3-button w3-blue w3-tiny">Onaylandı</a>
 						@else
-							<a href="/comments/{{$comment->id}}/approved" class="w3-button w3-red w3-tiny">Onaylanmadı</a>
+							<a href="/comments/{{$comment->id}}/approved" class="w3-button w3-orange w3-tiny">Onaylanmadı</a>
 						@endif
-
 					</td>
 				</tr>
 			@endforeach
