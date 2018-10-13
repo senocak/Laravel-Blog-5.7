@@ -4,14 +4,11 @@
 	{!! Html::style('editor/ckeditor/ckeditor.css') !!}
 	{!! Html::script('editor/ckeditor/ckeditor.js') !!}
 	<script>
-		CKEDITOR.replace( 'editor', {
-			//filebrowserUploadUrl: 'db.php?upload_img',
+		CKEDITOR.replace( 'editor',{
 			extraPlugins: 'image2,imageuploader,codesnippet', 
 			language: 'tr'
 		});  
 	</script>
-@endsection
-@section('content')
 	<style>
 		body {font-family: Arial, Helvetica, sans-serif;}
 		* {box-sizing: border-box;}
@@ -35,7 +32,7 @@
 		}
 		input[type=submit]:hover {background-color: #45a049;}
 		.container {border-radius: 5px;background-color: #f2f2f2;padding: 20px;}
-	</style><br>
+	</style>
 	<script type="text/javascript">
 		function showimagepreview(input) {
 			if (input.files && input.files[0]) {
@@ -45,6 +42,8 @@
 			}
 		}
 	</script>
+@endsection
+@section('content')
   	<form action="{{url('profile')}}" method="POST" enctype="multipart/form-data">
   		{{csrf_field()}}
   		<img src="../images/{{ Auth::user()->picture }}" width="250px">
@@ -55,9 +54,8 @@
 	    <textarea class="ckeditor" id="editor1" name="about" cols="50" rows="10">{{ Auth::user()->about }}</textarea>
 	    <input type="submit" value="Kaydet" class="w3-button w3-block w3-green">
   	</form>
-  	<br><br><br>
+  	<br>
 @endsection
-
 @section('scripts')
 	<script language="javascript" type="text/javascript">
 		CKEDITOR.replace('editor1',{

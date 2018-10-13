@@ -43,8 +43,16 @@ class CommentsController extends Controller{
         return redirect()->route('blog.single',[$post->slug]);
     }
     public function show($id){
-        $comments=Comment::where('post_id','=',$id)->get();
-        return view('comments.index')->withComments($comments);
+        if (!is_integer($id)) {
+            return $this->index();
+        }else{
+            $comments=Comment::where('post_id','=',$id)->get();
+            if (!$comments) {
+                return $this->index();
+            }else{
+                return view('comments.index')->withComments($comments);
+            }
+        }
     }
     public function edit($id){
         $comment=Comment::find($id);

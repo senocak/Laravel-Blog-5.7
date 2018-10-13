@@ -40,10 +40,11 @@ class PagesController extends Controller{
     $user->email=$request->email;
     $user->about=$request->about;
     if ($request->hasFile('img')) {
+      $slug=$this->self_url(($request->name));
       $img=$request->file('img');
-      $filename="pp.jpg";
+      $filename=$slug.".".$img->getClientOriginalExtension();
       $location=public_path('images/'.$filename);
-      Image::make($img)->save($location);
+      $img=Image::make($img)->save($location);
       $oldfilename=$user->picture;
       $user->picture=$filename;
     }

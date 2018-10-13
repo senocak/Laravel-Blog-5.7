@@ -1,3 +1,4 @@
+<?php $users = DB::table('users')->where('id','=',"1")->first();?>
 <!doctype html>
 <html lang="en">
   <head>@include('partials._head')</head>
