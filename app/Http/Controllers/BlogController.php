@@ -19,4 +19,12 @@ class BlogController extends Controller{
             return view('blog.single')->withPost($post)->withCategory($category);
         }
     }
+    public function Android($start=0){
+        if ($start!=0) {
+            $start=6*$start;
+        }
+        $post=Post::orderBy('fixed','desc')->orderBy('id','desc')->skip($start)->take(6)->get();
+        $category=Category::all();
+        return $post;
+    }
 }
