@@ -27,7 +27,7 @@ class PostController extends Controller{
         ));
         $post=new Post;
         $post->title=$request->title;
-        $post->slug=$this->self_url(($request->title));
+        $post->slug=self_url(($request->title));
         $post->body=$request->body;
         $post->category_id=$request->category_id;
         $post->save();
@@ -70,7 +70,7 @@ class PostController extends Controller{
         ));
         $post=Post::find($id);
         $post->title=$request->input('title');
-        $post->slug=$this->self_url(($request->title));
+        $post->slug=self_url(($request->title));
         $post->title=$request->input('title');
         $post->body=$request->body;
         $post->category_id=$request->input('category_id');
@@ -85,12 +85,6 @@ class PostController extends Controller{
         $post->delete();
         Session::flash('success','Yazı Silindi');
         return redirect()->route('posts.index');
-    }
-    public function self_url($title){
-        $search = array(" ","ö","ü","ı","ğ","ç","ş","/","?","Ö","Ü","I","Ğ","Ç","Ş","&","'","S",",");
-        $replace = array("-","o","u","i","g","c","s","-","","o","u","i","g","c","s","-","","s","");
-        $new_text = str_replace($search,$replace,trim($title));
-        return $new_text;
     }
     public function getDelete($id){
         $post=Post::find($id);

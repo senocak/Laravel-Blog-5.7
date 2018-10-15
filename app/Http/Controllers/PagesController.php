@@ -40,7 +40,7 @@ class PagesController extends Controller{
     $user->email=$request->email;
     $user->about=$request->about;
     if ($request->hasFile('img')) {
-      $slug=$this->self_url(($request->name));
+      $slug=self_url(($request->name));
       $img=$request->file('img');
       $filename=$slug.".".$img->getClientOriginalExtension();
       $location=public_path('images/'.$filename);
@@ -70,11 +70,5 @@ class PagesController extends Controller{
     });
     Session::flash('success','Mesaj Gönderildi');
     return redirect('contact');
-  }
-  public function self_url($title){
-    $search = array(" ","ö","ü","ı","ğ","ç","ş","/","?","Ö","Ü","I","Ğ","Ç","Ş","&","'");
-    $replace = array("_","o","u","i","g","c","s","_","_","o","u","i","g","c","s","_","");
-    $new_text = str_replace($search,$replace,trim($title));
-    return $new_text;
   }
 }

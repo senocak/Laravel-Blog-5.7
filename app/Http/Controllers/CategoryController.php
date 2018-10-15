@@ -24,7 +24,7 @@ class CategoryController extends Controller{
         ));
         $category=new Category;
         $category->name=$request->name;
-        $slug=$this->self_url(($request->name));
+        $slug=self_url(($request->name));
         $category->slug=$slug;
         if ($request->hasFile('img')) {
             $img=$request->file('img');
@@ -74,12 +74,6 @@ class CategoryController extends Controller{
         $category->delete();
         Session::flash('success','Kategori Silindi');
         return redirect()->route('categories.index');
-    } 
-    public function self_url($title){
-        $search = array(" ","ö","ü","ı","ğ","ç","ş","/","?","Ö","Ü","I","Ğ","Ç","Ş","&","'");
-        $replace = array("_","o","u","i","g","c","s","_","_","o","u","i","g","c","s","_","");
-        $new_text = str_replace($search,$replace,trim($title));
-        return $new_text;
     }
     public function getPost($slug){
         $category_id=Category::where('slug','=',$slug)->first();
