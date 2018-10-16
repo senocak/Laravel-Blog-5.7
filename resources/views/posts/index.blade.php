@@ -8,7 +8,7 @@
 @section('content')
 	<div id="alert"></div><br>
 	<?php $sayac=0; ?>
-	<a href="{{ route('posts.create') }}" class="w3-btn w3-blue-grey w3-block">Create Post</a>	
+	<a href="{{ route('posts.create') }}" class="w3-btn w3-blue-grey w3-block">Yazı Oluştur</a>	
 	<table class="w3-table-all">
 	    <tr>
 	     	<thead>

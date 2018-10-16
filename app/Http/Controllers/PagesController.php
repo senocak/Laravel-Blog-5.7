@@ -10,15 +10,20 @@ use Auth;
 use Image; 
 use Storage;
 use Cache;
+use App\Http\Controllers\CategoryController;
 class PagesController extends Controller{
   public function __construct(){
     $this->middleware('auth',['except' => ['getAbout','getContact','getIndex','postContact']]);
   }
   public function getIndex(){
+    /*
     $posts=Post::orderBy('fixed','desc')->orderBy('id','desc')->paginate(9);
     $category=Category::all();
     $this->site_settings = "ad";
     return view("pages.welcome")->withPosts($posts)->withCategory($category);
+    */  
+    $blogController = new BlogController;
+    print $blogController->getIndex();
   }
   public function getAbout(){
     $user=User::find("1");

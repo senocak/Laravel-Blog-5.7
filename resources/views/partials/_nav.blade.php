@@ -9,7 +9,7 @@
     </div> 
   </div>
   <div class="w3-bar-block">
-    <a href="/" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="")echo "w3-blue"; ?>"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Anasayfa</a>
+    <a href="/" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="" or Request::segment(1)=="blog")echo "w3-blue"; ?>"><i class="fa fa-th-large fa-fw w3-margin-right"></i>Anasayfa</a>
     <a href="/about" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="about")echo "w3-blue"; ?>"><i class="fa fa-user fa-fw w3-margin-right"></i>Hakkımda</a>
     <a href="/contact" class="w3-bar-item w3-button w3-padding <?php if(Request::segment(1)=="contact")echo "w3-blue"; ?>"><i class="fa fa-envelope fa-fw w3-margin-right"></i>İletişim</a>
     @if(Auth::check()) 

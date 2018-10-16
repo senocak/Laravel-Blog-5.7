@@ -8,7 +8,7 @@ use Image;
 use Storage; 
 class CategoryController extends Controller{
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth',['except' => ['getPost']]);
     }
     public function index(){ 
         $categories=Category::orderBy('sira','asc')->paginate(10);
@@ -75,7 +75,7 @@ class CategoryController extends Controller{
         Session::flash('success','Kategori Silindi');
         return redirect()->route('categories.index');
     }
-    public function getPost($slug){
+    public function getPost($slug=null){
         $category_id=Category::where('slug','=',$slug)->first();
         if(!$category_id){
             return redirect()->route("blog.index");

@@ -30,15 +30,16 @@
     </div>
    @endforeach
  </div>
-  <div class="w3-container">
+  <div class="w3-container w3-center w3-padding-16">
     {{ $posts->links('posts.page') }}
   </div>
-  <br><br>
+  <br><hr><br>
+  <div style="height: 265px;background-image: url({{url('/')}}/images/footer.png);background-position-x: -120px;background-position-y: 0px;"></div>
 @endsection
 
 @section('cat')
   <header id="portfolio">
-      <a href="#"><img src="pp.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+      <img src="{{url('/')}}/pp.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity">
       <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
       <div class="w3-container">
         <div class="w3-section w3-bottombar w3-padding-16">

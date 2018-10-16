@@ -33,7 +33,7 @@
 	    </select>
 	    {{Form::label('body','Body:')}}
 	    {{Form::textarea('body',null,array('class'=>'ckeditor','required'=>'','id'=>'editor1'))}}
-	    {{Form::submit('Create Post',array('class'=>'w3-btn w3-blue-grey w3-block','style'=>'margin-top:10px;'))}}
+	    {{Form::submit('Yazı Oluştur',array('class'=>'w3-btn w3-green w3-block','style'=>'margin-top:10px;'))}}
   	{!! Form::close() !!}
 @endsection
 @section('scripts')
