@@ -5,3 +5,12 @@ function self_url($title){
     $new_text = str_replace($search,$replace,trim($title));
     return $new_text;
 }
+function tema(){
+	$ayar = DB::table('ayar')->where("id","=",1)->get();
+	$ayar=(Array)$ayar[0];
+    return $ayar["tema"];
+    //return "w3css";
+}
+function temalar(){
+    return "bootstrap,w3css";
+}  

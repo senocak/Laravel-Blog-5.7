@@ -1,0 +1,1 @@
+@include(tema().'.blog_index')

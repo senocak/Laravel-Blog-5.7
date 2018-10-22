@@ -10,7 +10,7 @@ use Auth;
 use Image; 
 use Storage;
 use Cache;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Admin\CategoryController;
 class PagesController extends Controller{
   public function __construct(){
     $this->middleware('auth',['except' => ['getAbout','getContact','getIndex','postContact']]);
@@ -21,19 +21,19 @@ class PagesController extends Controller{
     $category=Category::all();
     $this->site_settings = "ad";
     return view("pages.welcome")->withPosts($posts)->withCategory($category);
-    */  
-    $blogController = new BlogController;
+    */
+    $blogController = new Admin\BlogController;
     print $blogController->getIndex();
   }
   public function getAbout(){
     $user=User::find("1");
-    return view("pages.about")->withData($user);
+    return view(tema().".about")->withData($user);
   }
   public function getContact(){
-    return view("pages.contact");
+    return view(tema().".contact");
   }
   public function getProfile(){
-    return view("pages.profile");
+    return view("admin.profile");
   }
   public function saveProfile(Request $request){
     $this->validate($request,array(
@@ -55,7 +55,7 @@ class PagesController extends Controller{
     }
     $user->save();
     Session::flash('success','Profil Güncellendi.'); 
-    return redirect()->route('login.index');
+    return redirect()->route(tema().'.login.index');
   }
   public function postContact(Request $request){
     $this->validate($request,array(
@@ -68,7 +68,7 @@ class PagesController extends Controller{
       'email' =>$request->email ,
       'bodyMessage' =>$request->bodyMessage
     );
-    Mail::send('emails.contact',$data,function($message)use ($data){
+    Mail::send('admin.emails.contact',$data,function($message)use ($data){
       $message->from($data['email']);
       $message->to('anil@bilgimedya.com.tr');
       $message->subject($data['subject']);
