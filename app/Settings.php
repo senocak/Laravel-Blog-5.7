@@ -12,5 +12,5 @@ function tema(){
     //return "w3css";
 }
 function temalar(){
-    return "bootstrap,w3css";
+    return "bootstrap,w3css,distribution";
 }  

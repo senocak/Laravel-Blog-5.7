@@ -54,7 +54,6 @@ $var=(Array)$ayar[0];
                                 @csrf
                                     <button type="submit" class="dropdown-item" href="/logout" >Çıkış</button>
                                 </form>
-
                         </div>
                     </div>
                  @endif

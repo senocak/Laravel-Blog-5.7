@@ -11,7 +11,6 @@ class BlogController extends Controller{
     	$category=Category::all();
     	//return view('blog.index')->withPosts($post)->withCategory($category);
         return view(tema().'.blog_index')->withPosts($post)->withCategory($category)->render();
-
     }
     public function getSingle($slug){
     	$post=Post::where('slug','=',$slug)->first();

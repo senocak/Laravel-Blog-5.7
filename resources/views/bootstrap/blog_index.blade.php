@@ -4,7 +4,7 @@
     @if(isset($image))
         {{ url('/')."/images/".$image }}
     @else
-        <?php echo url("/")."/images/".tema()."/home-bg.jpg"; ?>
+        <?php echo url("/")."/images/".tema()."/bg.jpg";?>
     @endif
 @endsection
 @section("h1")

@@ -1,6 +1,6 @@
 @extends('bootstrap.index')
 @section("title",config("ayarlar.baslik")." İletişim")
-@section("bg",url("/")."/images/".tema()."/contact-bg.jpg")
+@section("bg",url("/")."/images/".tema()."/bg.jpg")
 @section("h1","İletişim")
 @section("subheading","")
 @section("icerik")
