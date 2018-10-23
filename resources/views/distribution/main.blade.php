@@ -45,13 +45,10 @@ $var=(Array)$ayar[0];
           </div>
         </div>
         <div class="container">
-          <!-- Navbar Brand -->
           <div class="navbar-header d-flex align-items-center justify-content-between">
-            <!-- Navbar Brand --><a href="/" class="navbar-brand">Anıl Şenocak</a>
-            <!-- Toggle Button-->
+            <a href="/" class="navbar-brand">Anıl Şenocak</a> 
             <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
           </div>
-          <!-- Navbar Menu -->
           <div id="navbarcollapse" class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item"><a href="/" class="nav-link ">Anasayfa</a></li>

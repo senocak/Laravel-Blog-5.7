@@ -30,18 +30,19 @@ foreach($post->tags as $tag){
 	<hr>
 	<style>
 		.actionBox .form-group * {width:100%;}
-		.commenterImage {width:30px;margin-right:5px;height:100%;float:left;}
+		.commenterImage {width:50px;margin-right:5px;height:100%;float:left;}
 		.commenterImage img {width:100%;border-radius:50%;}
 		.commentText p {margin:0;}
 		.sub-text {color:#aaa;font-size:11px;}
 	</style> 
-	@foreach($post->comments as $comment)
-		@if($comment->approved=="1") 
-			<div class="commenterImage"><img src="{{"https://www.gravatar.com/avatar/".md5(strtolower(trim($comment->email)))}}" /></div>
-			<div class="commentText"><p class="">{{$comment->name}}</p> <p>{{$comment->comment}}</p><span class="date sub-text">{{ date('n F Y - G:i',strtotime($comment->created_at)) }}</span></div>
-		@endif
-	@endforeach 
-	<hr>
+	<div class="container">
+		@foreach($post->comments as $comment)
+			@if($comment->approved=="1") 
+				<div class="commenterImage"><img src="{{"https://www.gravatar.com/avatar/".md5(strtolower(trim($comment->email)))}}" /></div>
+				<div class="commentText"><p class="">{{$comment->name}} <span class="date sub-text">{{ date('n F Y - G:i',strtotime($comment->created_at)) }}</span></p> <p>{{$comment->comment}}</p></div><hr>
+			@endif
+		@endforeach  
+	</div>
 	<div class="container">
 		{{Form::open(['route'=>['comments.store',$post->id],'method'=>'POST'])}}
 			{{Form::text('name',null,['class'=>'form-control','style'=>'width:100%;','placeholder'=>'İsim','required'=>'required'])}}
@@ -49,7 +50,5 @@ foreach($post->tags as $tag){
 			{{Form::textarea('comment',null,['class'=>'form-control','style'=>'width:100%;resize:none;','placeholder'=>'Yorumunuz','rows'=>'5','required'=>'required'])}}
 			{{Form::submit('Yorum Ekle',['class'=>'btn btn-primary'])}}
 		{{Form::close()}}
-	</div>
-	<br><br>
-	<div style="height: 265px;background-image: url({{url('/')}}/images/footer.png);background-position-x: -120px;background-position-y: 0px;"></div>
+	</div> 
 @endsection
