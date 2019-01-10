@@ -1,2 +1,5 @@
 * text=auto
 *.php linguist-vendored
+
+* linguist-vendored
+*.php linguist-vendored=false
